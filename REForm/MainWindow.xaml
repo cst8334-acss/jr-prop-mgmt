@@ -1,0 +1,38 @@
+﻿<Window x:Class="REForm.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:REForm"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="#FF847878">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView HorizontalAlignment="Left" Height="373" VerticalAlignment="Top" Width="142" Margin="0,46,0,0" Background="#FF817878" SelectionChanged="ListView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Property's" DisplayMemberBinding="{Binding Property}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Menu HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="792"/>
+        <TabControl Height="402" Margin="142,17,0,0" Width="514" SelectionChanged="TabControl_SelectionChanged" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="100" MinHeight="100" >
+            <TabItem Header="TabItem" Height="22" VerticalAlignment="Top">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="149*"/>
+                        <ColumnDefinition Width="359*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="31,26,0,0" VerticalAlignment="Top" Width="75"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabItem" Header="TabItem">
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,-53" RenderTransformOrigin="0.494,0.822"/>
+            </TabItem>
+        </TabControl>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="0,17,0,0" VerticalAlignment="Top" Width="142" Height="29" Click="Button_Click"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,15 @@
+C:\Users\Ssche\source\repos\REForm\REForm\bin\Debug\REForm.exe.config
+C:\Users\Ssche\source\repos\REForm\REForm\bin\Debug\REForm.exe
+C:\Users\Ssche\source\repos\REForm\REForm\bin\Debug\REForm.pdb
+C:\Users\Ssche\source\repos\REForm\REForm\obj\Debug\REForm.csprojAssemblyReference.cache
+C:\Users\Ssche\source\repos\REForm\REForm\obj\Debug\MainWindow.g.cs
+C:\Users\Ssche\source\repos\REForm\REForm\obj\Debug\App.g.cs
+C:\Users\Ssche\source\repos\REForm\REForm\obj\Debug\REForm_MarkupCompile.cache
+C:\Users\Ssche\source\repos\REForm\REForm\obj\Debug\REForm_MarkupCompile.lref
+C:\Users\Ssche\source\repos\REForm\REForm\obj\Debug\MainWindow.baml
+C:\Users\Ssche\source\repos\REForm\REForm\obj\Debug\REForm.g.resources
+C:\Users\Ssche\source\repos\REForm\REForm\obj\Debug\REForm.Properties.Resources.resources
+C:\Users\Ssche\source\repos\REForm\REForm\obj\Debug\REForm.csproj.GenerateResource.cache
+C:\Users\Ssche\source\repos\REForm\REForm\obj\Debug\REForm.csproj.CoreCompileInputs.cache
+C:\Users\Ssche\source\repos\REForm\REForm\obj\Debug\REForm.exe
+C:\Users\Ssche\source\repos\REForm\REForm\obj\Debug\REForm.pdb
