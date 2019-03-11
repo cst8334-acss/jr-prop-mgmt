@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
-
+using REForm.Helpers;
 namespace REForm
 {
     /// <summary>
@@ -23,10 +23,12 @@ namespace REForm
     public partial class MainWindow : Window
     {
         public MySqlConnection connection;
+        public DataTable expensesDataTable;
+        public String GetExpensesQuery;
 
         public MainWindow()
         {
-            var GetExpensesQuery = "select expense_name as Name, expense_cost as Cost from expenses";
+            GetExpensesQuery = "select expense_name as Name, expense_cost as Cost from expenses";
 
             InitializeComponent();
 
@@ -35,11 +37,9 @@ namespace REForm
             this.connection = new MySqlConnection(connectionString);
 
             //Expenses Tab Logic
-            MySqlCommand cmd = new MySqlCommand(GetExpensesQuery, connection);
-            connection.Open();
-            DataTable expensesDataTable = new DataTable();
-            expensesDataTable.Load(cmd.ExecuteReader());
-            connection.Close();
+            expensesDataTable = new DataTable();
+
+            CRUDHelper.LoadDataTable(expensesDataTable, GetExpensesQuery, connection);
 
             ExpenseGrid.DataContext = expensesDataTable;
 
@@ -53,8 +53,14 @@ namespace REForm
 
         private void AddExpenseBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddExpenseWindow addWindow = new AddExpenseWindow(connection);
+            AddExpenseWindow addWindow = new AddExpenseWindow(connection, this);
             addWindow.Show();
+        }
+
+        public void RefreshExpenseGrid()
+        {
+            CRUDHelper.LoadDataTable(expensesDataTable, GetExpensesQuery, connection);
+            ExpenseGrid.DataContext = expensesDataTable;
         }
 
         private void AddTenantBtn_Click(object sender, RoutedEventArgs e)

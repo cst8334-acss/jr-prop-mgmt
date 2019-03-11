@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
-
+using REForm.Helpers;
 
 namespace REForm
 {
@@ -23,12 +24,14 @@ namespace REForm
     {
         public String ExpenseName { get; set; }
         public Double ExpenseCost { get; set; }
+        public DataGrid expenseGrid { get; set; }
         public MySqlConnection connection { get; set; }
+        public MainWindow mainWindow { get; set; }
 
-        public AddExpenseWindow(MySqlConnection connection)
+        public AddExpenseWindow(MySqlConnection connection, MainWindow mainWindow)
         {
             this.connection = connection;
-
+            this.mainWindow = mainWindow;
             InitializeComponent();
             DataContext = this;
 
@@ -56,11 +59,8 @@ namespace REForm
             ExpenseCost = Double.Parse(formExpenseCost.Text);
             var addExpenseQuery = buildApplyQuery(ExpenseName, ExpenseCost);
 
-            connection.Open();
-            MySqlCommand cmd = new MySqlCommand(addExpenseQuery, connection);
-            cmd.ExecuteReader();
-            connection.Close();
-
+            CRUDHelper.ExecuteQuery(addExpenseQuery, connection);
+            mainWindow.RefreshExpenseGrid();
             Close();
         }
 
