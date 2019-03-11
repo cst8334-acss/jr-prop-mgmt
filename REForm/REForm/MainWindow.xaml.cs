@@ -31,7 +31,7 @@ namespace REForm
             InitializeComponent();
 
             //Database Connection
-            var connectionString = "SERVER=localhost;PORT=3333;DATABASE=jr_prop;UID=root;PASSWORD=mypass4sql;";
+            var connectionString = "SERVER=localhost;PORT=3306;DATABASE=property;UID=root;PASSWORD=1234;";
             this.connection = new MySqlConnection(connectionString);
 
             //Expenses Tab Logic
@@ -54,6 +54,12 @@ namespace REForm
         private void AddExpenseBtn_Click(object sender, RoutedEventArgs e)
         {
             AddExpenseWindow addWindow = new AddExpenseWindow(connection);
+            addWindow.Show();
+        }
+
+        private void AddTenantBtn_Click(object sender, RoutedEventArgs e)
+        {
+            addTenantWindow addWindow = new addTenantWindow(connection);
             addWindow.Show();
         }
     }
