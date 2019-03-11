@@ -18,6 +18,14 @@
             </ListView.View>
         </ListView>
         <TabControl HorizontalAlignment="Left" Height="420" Margin="140,0,-0.4,0" VerticalAlignment="Top" Width="654">
+            <TabItem Header="Property">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="31*"/>
+                        <ColumnDefinition Width="618*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
             <TabItem Header="Tenant">
                 <Grid Background="#FFE5E5E5" Margin="0,0,-0.2,0.2" HorizontalAlignment="Left" Width="649">
                     <Grid.ColumnDefinitions>
@@ -34,14 +42,6 @@
                     <Label Content="Tenant Name" HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top"/>
                     <Button Content="New" HorizontalAlignment="Left" Margin="52.4,187,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.909,-2.042" Grid.Column="1"/>
                     <Button Content="Edit" HorizontalAlignment="Left" Margin="188.4,187,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Property">
-                <Grid Background="#FFE5E5E5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="31*"/>
-                        <ColumnDefinition Width="618*"/>
-                    </Grid.ColumnDefinitions>
                 </Grid>
             </TabItem>
             <TabItem Header="Expenses">
@@ -75,7 +75,7 @@
                     </TabControl>
                     <Button Content="Edit" HorizontalAlignment="Left" Margin="420,120,0,0" VerticalAlignment="Top" Width="75"/>
                     <Button Content="Delete" HorizontalAlignment="Left" Margin="550,120,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Add" HorizontalAlignment="Left" Margin="290,120,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Add" Click="AddExpenseBtn_Click" HorizontalAlignment="Left" Margin="290,120,0,0" VerticalAlignment="Top" Width="75" Name="addExpenseBtn"/>
                 </Grid>
 
             </TabItem>

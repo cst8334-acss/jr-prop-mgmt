@@ -24,19 +24,35 @@ namespace REForm
     {
         public MainWindow()
         {
+            var GetExpensesQuery = "select expense_name as Name, expense_cost as Cost from expenses";
+
             InitializeComponent();
 
-            var connectionString = "SERVER=localhost;PORT=3333;DATABASE=jr_prop;UID=root;PASSWORD=YOUR_PASS_HERE;";
-
+            //Database Connection
+            var connectionString = "SERVER=localhost;PORT=3333;DATABASE=jr_prop;UID=root;PASSWORD=mypass4sql;";
             MySqlConnection connection = new MySqlConnection(connectionString);
 
-            MySqlCommand cmd = new MySqlCommand("select * from expenses", connection);
+            //Expenses Tab Logic
+            MySqlCommand cmd = new MySqlCommand(GetExpensesQuery, connection);
             connection.Open();
             DataTable expensesDataTable = new DataTable();
             expensesDataTable.Load(cmd.ExecuteReader());
             connection.Close();
 
             ExpenseGrid.DataContext = expensesDataTable;
+
+            Button addExpenseBtn = new Button
+            {
+                Name = "addExpenseBtn"
+            };
+            addExpenseBtn.Click += AddExpenseBtn_Click;
+
+        }
+
+        private void AddExpenseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddExpenseWindow addWindow = new AddExpenseWindow();
+            addWindow.Show();
         }
     }
 }
