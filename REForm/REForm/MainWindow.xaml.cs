@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace REForm
 {
@@ -23,6 +25,18 @@ namespace REForm
         public MainWindow()
         {
             InitializeComponent();
+
+            var connectionString = "SERVER=localhost;PORT=3333;DATABASE=jr_prop;UID=root;PASSWORD=YOUR_PASS_HERE;";
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+
+            MySqlCommand cmd = new MySqlCommand("select * from expenses", connection);
+            connection.Open();
+            DataTable expensesDataTable = new DataTable();
+            expensesDataTable.Load(cmd.ExecuteReader());
+            connection.Close();
+
+            ExpenseGrid.DataContext = expensesDataTable;
         }
     }
 }
