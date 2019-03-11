@@ -37,13 +37,9 @@ namespace REForm
             this.connection = new MySqlConnection(connectionString);
 
             //Expenses Tab Logic
-            //MySqlCommand cmd = new MySqlCommand(GetExpensesQuery, connection);
-            //connection.Open();
             expensesDataTable = new DataTable();
 
             CRUDHelper.LoadDataTable(expensesDataTable, GetExpensesQuery, connection);
-           // expensesDataTable.Load(cmd.ExecuteReader());
-            //connection.Close();
 
             ExpenseGrid.DataContext = expensesDataTable;
 
