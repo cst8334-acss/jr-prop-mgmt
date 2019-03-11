@@ -5,24 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:REForm"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ACS Property Manager" Height="450" Width="800">
     <Grid Background="#FF847878">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListView HorizontalAlignment="Left" Height="402" VerticalAlignment="Top" Width="142" Margin="0,17,0,0" Background="#FF817878">
+        <ListView HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="140" Background="#FF817878">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Menu HorizontalAlignment="Left" Height="17" VerticalAlignment="Top" Width="792"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="379" Margin="142,40,0,0" Stroke="Black" VerticalAlignment="Top" Width="514"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="142,17,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="217,17,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="292,17,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="367,17,0,0" VerticalAlignment="Top" Width="75" Height="23"/>
+        <TabControl HorizontalAlignment="Left" Height="420" Margin="140,0,-0.4,0" VerticalAlignment="Top" Width="654">
+            <TabItem Header="Tenant">
+                <Grid Background="#FFE5E5E5" Margin="0,0,-0.2,0.2" HorizontalAlignment="Left" Width="649">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="326*"/>
+                        <ColumnDefinition Width="323*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="55,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="265,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="143.4,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Unit" HorizontalAlignment="Left" Margin="55,73,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Sq Ft." HorizontalAlignment="Left" Margin="265,73,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Price per Sq Ft." Grid.Column="1" HorizontalAlignment="Left" Margin="143.4,73,0,0" VerticalAlignment="Top"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="55,35,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Tenant Name" HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top"/>
+                    <Button Content="New" HorizontalAlignment="Left" Margin="52.4,187,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.909,-2.042" Grid.Column="1"/>
+                    <Button Content="Edit" HorizontalAlignment="Left" Margin="188.4,187,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Property">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="31*"/>
+                        <ColumnDefinition Width="618*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Expenses">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl HorizontalAlignment="Left" Height="600" Margin="238,-50,0,-158" VerticalAlignment="Top" Width="176" RenderTransformOrigin="0.5,0.5">
+                        <TabControl.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TabControl.RenderTransform>
+                        <TabItem Header="Operational">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Administrative">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                    </TabControl>
+                    <Button Content="Edit" HorizontalAlignment="Left" Margin="420,120,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Delete" HorizontalAlignment="Left" Margin="550,120,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Add" HorizontalAlignment="Left" Margin="290,120,0,0" VerticalAlignment="Top" Width="75"/>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+
+
 
     </Grid>
 </Window>
