@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="Add Expense" Height="225" Width="400">
     <Grid>
-        <Button Content="Apply" HorizontalAlignment="Left" Margin="172,140,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="293,140,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,37,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Apply" Click="ApplyBtn_Click" HorizontalAlignment="Left" Margin="172,140,0,0" VerticalAlignment="Top" Width="75" Name="ApplyBtn"/>
+        <Button Content="Cancel" Click="CancelBtn_Click" HorizontalAlignment="Left" Margin="293,140,0,0" VerticalAlignment="Top" Width="75" Name="CancelBtn"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,37,0,0" TextWrapping="Wrap" Text="{Binding ExpenseName}" VerticalAlignment="Top" Width="120" Name="formExpenseName"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" Text="{Binding ExpenseCost}" VerticalAlignment="Top" Width="120" Name="formExpenseCost"/>
         <RadioButton Content="Operational" HorizontalAlignment="Left" Margin="165,37,0,0" VerticalAlignment="Top"/>
         <RadioButton Content="Administrative" HorizontalAlignment="Left" Margin="273,37,0,0" VerticalAlignment="Top"/>
         <Label Content="Expense Name" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top"/>

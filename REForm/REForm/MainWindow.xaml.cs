@@ -22,6 +22,8 @@ namespace REForm
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MySqlConnection connection;
+
         public MainWindow()
         {
             var GetExpensesQuery = "select expense_name as Name, expense_cost as Cost from expenses";
@@ -30,7 +32,7 @@ namespace REForm
 
             //Database Connection
             var connectionString = "SERVER=localhost;PORT=3333;DATABASE=jr_prop;UID=root;PASSWORD=mypass4sql;";
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            this.connection = new MySqlConnection(connectionString);
 
             //Expenses Tab Logic
             MySqlCommand cmd = new MySqlCommand(GetExpensesQuery, connection);
@@ -51,7 +53,7 @@ namespace REForm
 
         private void AddExpenseBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddExpenseWindow addWindow = new AddExpenseWindow();
+            AddExpenseWindow addWindow = new AddExpenseWindow(connection);
             addWindow.Show();
         }
     }
