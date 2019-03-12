@@ -39,11 +39,11 @@ namespace REForm
         {
             //Select queries to get data from database
             GetExpensesQuery = "select expense_name as Name, expense_cost as Cost from expenses";
-            GetTenantQuery = "select tenant.tenantId as 'Id', tenant.tenant_name as 'Name', tenant.unit_number as 'Unit#', tenant.square_feet as 'Square Feet', tenant.rent_per_sf as 'Rent per SF', tenant.monthly_rent as 'Monthly Rent', tenant.annual_rent as 'Annual Rent' from property.tenant;";
+            GetTenantQuery = "select tenant.tenantId as 'Id', tenant.tenant_name as 'Name', tenant.unit_number as 'Unit#', tenant.square_feet as 'Square Feet', tenant.rent_per_sf as 'Rent per SF', tenant.monthly_rent as 'Monthly Rent', tenant.annual_rent as 'Annual Rent' from tenant;";
             InitializeComponent();
 
             //Database Connection
-            var connectionString = "SERVER=localhost;PORT=3306;DATABASE=property;UID=root;PASSWORD=1234;";
+            var connectionString = "SERVER=localhost;PORT=3333;DATABASE=jr_prop;UID=root;PASSWORD=mypass4sql;";
             connection = new MySqlConnection(connectionString);
 
             //Expenses Tab Logic
@@ -75,7 +75,7 @@ namespace REForm
 
         private void DeleteExpenseButton_Click(object sender, RoutedEventArgs e)
         {
-            //DELETE FROM DATAGRID
+            expensesDataTable.Rows.RemoveAt(ExpenseGrid.SelectedIndex);
         }
 
         //Adds new expense window on click event

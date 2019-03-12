@@ -90,7 +90,7 @@ namespace REForm
         /// <returns></returns>
         private String buildSaveQuery(String TenantName, Int16 UnitNumber, Double SquareFeet, Double RentPerSF, Double MonthlyRent, Double AnnualRent,Int16 TenantPropertyId)
         {
-            var command = "INSERT INTO property.tenant (tenant_name,unit_number,square_feet,rent_per_sf,monthly_rent,annual_rent,tenant_propertyId)" +
+            var command = "INSERT INTO TENANT (tenant_name,unit_number,square_feet,rent_per_sf,monthly_rent,annual_rent,tenant_propertyId)" +
                          $"VALUES ('{TenantName}', {UnitNumber},{SquareFeet},{RentPerSF},{MonthlyRent},{AnnualRent},{TenantPropertyId});";
             return command;
         }
