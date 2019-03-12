@@ -24,6 +24,10 @@
                         <ColumnDefinition Width="31*"/>
                         <ColumnDefinition Width="618*"/>
                     </Grid.ColumnDefinitions>
+                    <DataGrid Grid.Column="1" Name="PropertyGrid" ItemsSource="{Binding}"  HorizontalAlignment="Left" Height="214" Margin="0,21,0,0" VerticalAlignment="Top" Width="607"/>
+                    <Button Content="Create" Name="addProperty"    Click="AddProperty_Click"  Grid.Column="1" HorizontalAlignment="Left" Margin="59,287,0,0" VerticalAlignment="Top" Width="75" />
+                    <Button Content="Update"  Name="updateProperty" Click="UpdateProperty_Click"   Grid.Column="1" HorizontalAlignment="Left" Margin="227,287,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Delete" Name="deleteProperty"  Click="DeleteProperty_Click"  Grid.Column="1" HorizontalAlignment="Left" Margin="410,287,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Tenant">
@@ -69,9 +73,9 @@
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
                     </TabControl>
-                    <Button Content="Edit" HorizontalAlignment="Left" Margin="420,120,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Delete" Click="DeleteExpenseButton_Click" HorizontalAlignment="Left" Margin="550,120,0,0" VerticalAlignment="Top" Width="75" Name="deleteExpenseBtn"/>
-                    <Button Content="Add" Click="AddExpenseBtn_Click" HorizontalAlignment="Left" Margin="290,120,0,0" VerticalAlignment="Top" Width="75" Name="addExpenseBtn"/>
+                    <Button Content="Edit" HorizontalAlignment="Left" Margin="277,120,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3"/>
+                    <Button Content="Delete" Click="DeleteExpenseButton_Click" HorizontalAlignment="Left" Margin="407,120,0,0" VerticalAlignment="Top" Width="75" Name="deleteExpenseBtn" Grid.Column="3"/>
+                    <Button Content="Add" Click="AddExpenseBtn_Click" HorizontalAlignment="Left" Margin="147,120,0,0" VerticalAlignment="Top" Width="75" Name="addExpenseBtn" Grid.Column="3"/>
                 </Grid>
 
             </TabItem>

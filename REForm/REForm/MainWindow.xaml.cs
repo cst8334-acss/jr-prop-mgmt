@@ -29,21 +29,26 @@ namespace REForm
         //Declaration for expense table
         public DataTable expensesDataTable;
         public String GetExpensesQuery;
+        public String GetPropertyQuery;
 
         //Declaration for tenant table
         public DataTable tenantDataTable;
+        public DataTable PropertyDataTable;
         public String GetTenantQuery;
         public String DeleteTenantQuery;
+        public String DeletePropertyQuery;
 
         public MainWindow()
         {
             //Select queries to get data from database
             GetExpensesQuery = "select expense_name as Name, expense_cost as Cost from expenses";
             GetTenantQuery = "select tenant.tenantId as 'Id', tenant.tenant_name as 'Name', tenant.unit_number as 'Unit#', tenant.square_feet as 'Square Feet', tenant.rent_per_sf as 'Rent per SF', tenant.monthly_rent as 'Monthly Rent', tenant.annual_rent as 'Annual Rent' from property.tenant;";
+            GetPropertyQuery = "SELECT property_details.propertyId as 'Id', property_details.address as 'Address' ,property_details.city as 'City',property_details.postal_code as 'Postal Code', property_details.province as 'Province', property_details.country as 'Country',property_details.number_of_units as 'Units',property_details.property_name as 'Name' FROM property.property_details; ";
+            DeletePropertyQuery= "DELETE FROM property.property_details  WHERE ;"
             InitializeComponent();
 
             //Database Connection
-            var connectionString = "SERVER=localhost;PORT=3306;DATABASE=property;UID=root;PASSWORD=1234;";
+            var connectionString = "SERVER=localhost;PORT=3306;DATABASE=property;UID=root;PASSWORD=yA907191;";
             connection = new MySqlConnection(connectionString);
 
             //Expenses Tab Logic
@@ -56,7 +61,10 @@ namespace REForm
             CRUDHelper.LoadDataTable(tenantDataTable, GetTenantQuery, connection);
             TenantGrid.DataContext = tenantDataTable;
 
-            
+            PropertyDataTable = new DataTable();
+            CRUDHelper.LoadDataTable(PropertyDataTable, GetPropertyQuery, connection);
+            PropertyGrid.DataContext = PropertyDataTable;
+
             //Add Expense Button
             Button addExpenseBtn = new Button
             {
@@ -113,6 +121,29 @@ namespace REForm
         private void EditTenantBtn_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void AddProperty_Click(object sender, RoutedEventArgs e)
+        {
+            AddProperty addWindow = new AddProperty(connection, this);
+            addWindow.Show();
+        }
+
+        private void UpdateProperty_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteProperty_Click(object sender, RoutedEventArgs e)
+        {
+            PropertyDataTable.Rows.RemoveAt(PropertyGrid.SelectedIndex);
+            MessageBox.Show("Property Deleted");
+
+        }
+        public void RefreshPropertyGrid()
+        {
+            CRUDHelper.LoadDataTable(PropertyDataTable, GetPropertyQuery, connection);
+            PropertyGrid.DataContext = PropertyDataTable;
         }
     }
 }
