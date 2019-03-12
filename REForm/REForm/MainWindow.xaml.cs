@@ -106,8 +106,16 @@ namespace REForm
         //Delete the selected row from datagrid
         private void DeleteTenantBtn_Click(object sender, RoutedEventArgs e)
         {
-            tenantDataTable.Rows.RemoveAt(TenantGrid.SelectedIndex);
-            MessageBox.Show("Tenant Deleted");
+            try
+            {
+                tenantDataTable.Rows.RemoveAt(TenantGrid.SelectedIndex);
+                MessageBox.Show("Tenant Deleted");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Please select atleast one item to perform this operation");
+                Console.WriteLine(ex);
+            }
         }
        
         private void EditTenantBtn_Click(object sender, RoutedEventArgs e)

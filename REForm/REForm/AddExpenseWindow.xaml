@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:REForm"
         mc:Ignorable="d"
-        Title="Add Expense" Height="225" Width="400">
+        Title="Add Expense" Height="225" Width="400"
+        Icon="./Resources/logo.png">
     <Grid>
         <Button Content="Apply" Click="ApplyBtn_Click" HorizontalAlignment="Left" Margin="172,140,0,0" VerticalAlignment="Top" Width="75" Name="ApplyBtn"/>
         <Button Content="Cancel" Click="CancelBtn_Click" HorizontalAlignment="Left" Margin="293,140,0,0" VerticalAlignment="Top" Width="75" Name="CancelBtn"/>
