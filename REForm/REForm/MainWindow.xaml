@@ -74,7 +74,7 @@
                         </TabItem>
                     </TabControl>
                     <Button Content="Edit" HorizontalAlignment="Left" Margin="420,120,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="550,120,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Delete" Click="DeleteExpenseButton_Click" HorizontalAlignment="Left" Margin="550,120,0,0" VerticalAlignment="Top" Width="75" Name="deleteExpenseBtn"/>
                     <Button Content="Add" Click="AddExpenseBtn_Click" HorizontalAlignment="Left" Margin="290,120,0,0" VerticalAlignment="Top" Width="75" Name="addExpenseBtn"/>
                 </Grid>
 
