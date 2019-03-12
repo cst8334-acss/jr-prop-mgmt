@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:REForm"
         mc:Ignorable="d"
-        Title="ACS Property Manager" Height="450" Width="800">
+        Title="ACS Property Manager" Height="450" Width="800"
+        Icon="./Resources/logo.png">
     <Grid Background="#FF847878">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -42,7 +43,7 @@
                         <ColumnDefinition Width="14*"/>
                         <ColumnDefinition Width="556*"/>
                     </Grid.ColumnDefinitions>
-                    <TabControl HorizontalAlignment="Left" Height="600" Margin="144.8,-50,0,-158" VerticalAlignment="Top" Width="176" RenderTransformOrigin="0.5,0.5" Grid.Column="3">
+                    <TabControl HorizontalAlignment="Left" Height="476" Margin="63.2,-142,0,0" VerticalAlignment="Top" Width="176" RenderTransformOrigin="0.5,0.5" Grid.Column="3">
                         <TabControl.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -53,7 +54,7 @@
                         </TabControl.RenderTransform>
                         <TabItem Header="Operational">
                             <Grid Background="#FFE5E5E5">
-                                <DataGrid HorizontalAlignment="Left" Height="142" Margin="-186,218,-183.6,0" VerticalAlignment="Top" Width="540" Name="ExpenseGrid" ItemsSource="{Binding}" RenderTransformOrigin="0.5,0.5">
+                                <DataGrid HorizontalAlignment="Left" Height="142" Margin="-124,156,-121.6,0" VerticalAlignment="Top" Width="416" Name="ExpenseGrid" ItemsSource="{Binding}" RenderTransformOrigin="0.5,0.5">
                                     <DataGrid.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform/>
@@ -69,9 +70,9 @@
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
                     </TabControl>
-                    <Button Content="Edit" HorizontalAlignment="Left" Margin="420,120,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Delete" Click="DeleteExpenseButton_Click" HorizontalAlignment="Left" Margin="550,120,0,0" VerticalAlignment="Top" Width="75" Name="deleteExpenseBtn"/>
-                    <Button Content="Add" Click="AddExpenseBtn_Click" HorizontalAlignment="Left" Margin="290,120,0,0" VerticalAlignment="Top" Width="75" Name="addExpenseBtn"/>
+                    <Button Content="Edit" HorizontalAlignment="Left" Margin="407,117,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3"/>
+                    <Button Content="Delete" Click="DeleteExpenseButton_Click" HorizontalAlignment="Left" Margin="407,77,0,0" VerticalAlignment="Top" Width="75" Name="deleteExpenseBtn" Grid.Column="3"/>
+                    <Button Content="Add" Click="AddExpenseBtn_Click" HorizontalAlignment="Left" Margin="407,37,0,0" VerticalAlignment="Top" Width="75" Name="addExpenseBtn" Grid.Column="3"/>
                 </Grid>
 
             </TabItem>

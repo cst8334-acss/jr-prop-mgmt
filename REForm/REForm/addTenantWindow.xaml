@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:REForm"
         mc:Ignorable="d"
-        Title="New Tenant" Height="400" Width="400">
+        Title="New Tenant" Height="400" Width="400"
+        Icon="./Resources/logo.png">
     <Grid>
         <Button Content="Save" HorizontalAlignment="Left" Margin="15,208,0,0" VerticalAlignment="Top" Width="75" Name="SaveBtn" Click="SaveBtn_Click"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="127,208,0,0" VerticalAlignment="Top" Width="75" Name="CancelBtn" Click="CancelBtn_Click"/>
