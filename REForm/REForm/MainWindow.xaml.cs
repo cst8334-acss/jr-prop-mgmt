@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using REForm.Helpers;
+using REForm.Models;
+
 namespace REForm
 {
     /// <summary>
@@ -42,13 +44,26 @@ namespace REForm
             CRUDHelper.LoadDataTable(expensesDataTable, GetExpensesQuery, connection);
 
             ExpenseGrid.DataContext = expensesDataTable;
-
+            
+            //Add Expense Button
             Button addExpenseBtn = new Button
             {
                 Name = "addExpenseBtn"
             };
             addExpenseBtn.Click += AddExpenseBtn_Click;
 
+            //Delete Expense Button
+            Button deleteExpenseButton = new Button
+            {
+                Name = "deleteExpenseBtn"
+            };
+            deleteExpenseButton.Click += DeleteExpenseButton_Click;
+
+        }
+
+        private void DeleteExpenseButton_Click(object sender, RoutedEventArgs e)
+        {
+            //DELETE FROM DATAGRID
         }
 
         private void AddExpenseBtn_Click(object sender, RoutedEventArgs e)
