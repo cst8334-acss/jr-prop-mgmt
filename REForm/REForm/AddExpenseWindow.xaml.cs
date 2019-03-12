@@ -57,14 +57,14 @@ namespace REForm
         {
             ExpenseName = formExpenseName.Text;
             ExpenseCost = Double.Parse(formExpenseCost.Text);
-            var addExpenseQuery = buildApplyQuery(ExpenseName, ExpenseCost);
+            var addExpenseQuery = buildApplyQuery(ExpenseName, ExpenseCost, 0);
 
             CRUDHelper.ExecuteQuery(addExpenseQuery, connection);
             mainWindow.RefreshExpenseGrid();
             Close();
         }
 
-        private String buildApplyQuery(String expName, Double expCost)
+        private String buildApplyQuery(String expName, Double expCost, int expenseType)
         {
             var command = "INSERT INTO EXPENSES (expense_name, expense_cost)" +
                          $"VALUES ('{ExpenseName}', {ExpenseCost.ToString()}); ";
