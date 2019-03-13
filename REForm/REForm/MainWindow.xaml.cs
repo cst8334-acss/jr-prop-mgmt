@@ -73,6 +73,7 @@ namespace REForm
 
         }
 
+        //Delets row from the Expense Data Table
         private void DeleteExpenseButton_Click(object sender, RoutedEventArgs e)
         {
             expensesDataTable.Rows.RemoveAt(ExpenseGrid.SelectedIndex);
