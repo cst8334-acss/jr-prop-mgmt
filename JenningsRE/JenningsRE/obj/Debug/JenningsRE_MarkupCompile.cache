@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Ssche\source\repos\JenningsRE\JenningsRE\obj\Debug\
+D:\Semester4\jr-prop-mgmt\JenningsRE\JenningsRE\obj\Debug\
 JenningsRE
 none
 false
 DEBUG;TRACE
-C:\Users\Ssche\source\repos\JenningsRE\JenningsRE\App.xaml
+D:\Semester4\jr-prop-mgmt\JenningsRE\JenningsRE\App.xaml
 6-580672409
 
-10943686834
+141621310217
 131569487696
 AddExpense.xaml;AddProperty.xaml;LoginWindow.xaml;MainWindow.xaml;AddTenant.xaml;OpenWindow.xaml;
 
-False
+True
 
