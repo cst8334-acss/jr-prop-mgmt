@@ -59,6 +59,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
@@ -84,6 +85,41 @@
     </Compile>
     <Compile Include="AddTenant.xaml.cs">
       <DependentUpon>AddTenant.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="analysis.cs">
+      <DependentUpon>PropertyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\AnalysisAccess.cs" />
+    <Compile Include="DAL\ExpenseAccess.cs" />
+    <Compile Include="DAL\PropertyAccess.cs" />
+    <Compile Include="DAL\TenantAccess.cs" />
+    <Compile Include="DAL\TwentyYearAccess.cs" />
+    <Compile Include="expense.cs">
+      <DependentUpon>PropertyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="property.cs">
+      <DependentUpon>PropertyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="tenant.cs">
+      <DependentUpon>PropertyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="twenty_five_year_return.cs">
+      <DependentUpon>PropertyModel.tt</DependentUpon>
     </Compile>
     <Page Include="AddExpense.xaml">
       <SubType>Designer</SubType>
@@ -157,9 +193,34 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <EntityDeploy Include="PropertyModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PropertyModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PropertyModel.edmx.diagram">
+      <DependentUpon>PropertyModel.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PropertyModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PropertyModel.edmx</DependentUpon>
+      <LastGenOutput>PropertyModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="PropertyModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PropertyModel.edmx</DependentUpon>
+      <LastGenOutput>PropertyModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
