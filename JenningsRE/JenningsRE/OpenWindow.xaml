@@ -1,0 +1,14 @@
+﻿<Window x:Class="JenningsRE.OpenWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JenningsRE"
+        mc:Ignorable="d"
+        Title="OpenWindow" Height="450" Width="800">
+    <Grid>
+        <Button Content="Property Management" Margin="70,75,0,75" HorizontalAlignment="Left" Width="269" Click="OpenMain_Click"/>
+        <Button Content="Property Analysis" Margin="0,75,70,75" HorizontalAlignment="Right" Width="269" Click="OpenAnalysis_Click"/>
+
+    </Grid>
+</Window>
