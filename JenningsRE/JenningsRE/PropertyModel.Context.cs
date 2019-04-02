@@ -13,10 +13,10 @@ namespace JenningsRE
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class jenningsdbEntities : DbContext
+    public partial class jenningsdbEntitiesConnection : DbContext
     {
-        public jenningsdbEntities()
-            : base("name=jenningsdbEntities")
+        public jenningsdbEntitiesConnection()
+            : base("name=jenningsdbEntitiesConnection")
         {
         }
     
@@ -25,8 +25,10 @@ namespace JenningsRE
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<analysis> analyses { get; set; }
         public virtual DbSet<expense> expenses { get; set; }
         public virtual DbSet<property> properties { get; set; }
         public virtual DbSet<tenant> tenants { get; set; }
+        public virtual DbSet<twenty_five_year_return> twenty_five_year_return { get; set; }
     }
 }

@@ -4,7 +4,36 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="JenningsDBModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="jenningsdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="analysis">
+          <Key>
+            <PropertyRef Name="analysis_id" />
+          </Key>
+          <Property Name="analysis_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="acquisition_leasing_fee" Type="double" />
+          <Property Name="acquisition_leasing_percentage" Type="double" />
+          <Property Name="syndication_fee" Type="double" />
+          <Property Name="syndication_percentage" Type="double" />
+          <Property Name="land_transfer_tax" Type="double" />
+          <Property Name="land_transfer_percentage" Type="double" />
+          <Property Name="legal_purchase_lease_fee" Type="double" />
+          <Property Name="contingency_tenant_improvement_fee" Type="double" />
+          <Property Name="environmental_fee" Type="double" />
+          <Property Name="construction_fee" Type="double" />
+          <Property Name="mortgage_fee" Type="double" />
+          <Property Name="bcr_fee" Type="double" />
+          <Property Name="appraisal_fee" Type="double" />
+          <Property Name="total_closing_fees" Type="double" />
+          <Property Name="total_acquisition_cost" Type="double" />
+          <Property Name="mortgage_ltv_cost" Type="double" />
+          <Property Name="mortgage_ltv_percentage" Type="double" />
+          <Property Name="twenty_year_interest_rate" Type="double" />
+          <Property Name="twenty_year_interest_rate_percentage" Type="double" />
+          <Property Name="twenty_five_year_interest_rate" Type="double" />
+          <Property Name="twenty_five_year_interest_rate_percentage" Type="double" />
+          <Property Name="annual_debt_service_twenty_years" Type="double" />
+          <Property Name="annual_debt_service_twenty_five_years" Type="double" />
+        </EntityType>
         <EntityType Name="expense">
           <Key>
             <PropertyRef Name="expense_id" />
@@ -14,14 +43,14 @@
           <Property Name="expense_type" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="expense_cost" Type="double" Nullable="false" />
           <Property Name="contractor_name" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="expense_property_id" Type="int" />
+          <Property Name="expense_property_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="property">
           <Key>
             <PropertyRef Name="property_id" />
           </Key>
           <Property Name="property_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="property_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="property_name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="city" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="postal_code" Type="varchar" MaxLength="6" Nullable="false" />
@@ -46,18 +75,119 @@
           <Property Name="lease_start" Type="date" Nullable="false" />
           <Property Name="lease_end" Type="date" Nullable="false" />
           <Property Name="months_left" Type="int" Nullable="false" />
-          <Property Name="tenant_property_id" Type="int" />
+          <Property Name="tenant_property_id" Type="int" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="JenningsDBModelStoreContainer">
+        <EntityType Name="twenty_five_year_return">
+          <Key>
+            <PropertyRef Name="return_id" />
+          </Key>
+          <Property Name="return_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="analysis_id" Type="int" Nullable="false" />
+          <Property Name="return_year" Type="year" />
+          <Property Name="base_rental_revenue" Type="double" />
+          <Property Name="additional_revenue" Type="double" />
+          <Property Name="slippage" Type="double" />
+          <Property Name="total_revenue" Type="double" />
+          <Property Name="vacancy_bad_debt" Type="double" />
+          <Property Name="interest_payments" Type="double" />
+          <Property Name="principal_payments" Type="double" />
+          <Property Name="total_debt_service" Type="double" />
+          <Property Name="net_operating_income" Type="double" />
+          <Property Name="noi_percentage" Type="double" />
+          <Property Name="internal_rate_of_return_percentage" Type="double" />
+          <Property Name="cash_on_cash_share" Type="double" />
+          <Property Name="total_return_share" Type="double" />
+        </EntityType>
+        <Association Name="fk_analysis_return">
+          <End Role="analysis" Type="Self.analysis" Multiplicity="1" />
+          <End Role="twenty_five_year_return" Type="Self.twenty_five_year_return" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="analysis">
+              <PropertyRef Name="analysis_id" />
+            </Principal>
+            <Dependent Role="twenty_five_year_return">
+              <PropertyRef Name="analysis_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_property_expense">
+          <End Role="property" Type="Self.property" Multiplicity="1" />
+          <End Role="expense" Type="Self.expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="property">
+              <PropertyRef Name="property_id" />
+            </Principal>
+            <Dependent Role="expense">
+              <PropertyRef Name="expense_property_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tenant_property">
+          <End Role="property" Type="Self.property" Multiplicity="1" />
+          <End Role="tenant" Type="Self.tenant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="property">
+              <PropertyRef Name="property_id" />
+            </Principal>
+            <Dependent Role="tenant">
+              <PropertyRef Name="tenant_property_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="jenningsdbModelStoreContainer">
+          <EntitySet Name="analysis" EntityType="Self.analysis" Schema="jenningsdb" store:Type="Tables" />
           <EntitySet Name="expense" EntityType="Self.expense" Schema="jenningsdb" store:Type="Tables" />
           <EntitySet Name="property" EntityType="Self.property" Schema="jenningsdb" store:Type="Tables" />
           <EntitySet Name="tenant" EntityType="Self.tenant" Schema="jenningsdb" store:Type="Tables" />
+          <EntitySet Name="twenty_five_year_return" EntityType="Self.twenty_five_year_return" Schema="jenningsdb" store:Type="Tables" />
+          <AssociationSet Name="fk_analysis_return" Association="Self.fk_analysis_return">
+            <End Role="analysis" EntitySet="analysis" />
+            <End Role="twenty_five_year_return" EntitySet="twenty_five_year_return" />
+          </AssociationSet>
+          <AssociationSet Name="fk_property_expense" Association="Self.fk_property_expense">
+            <End Role="property" EntitySet="property" />
+            <End Role="expense" EntitySet="expense" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tenant_property" Association="Self.fk_tenant_property">
+            <End Role="property" EntitySet="property" />
+            <End Role="tenant" EntitySet="tenant" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="JenningsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="jenningsdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="analysis">
+          <Key>
+            <PropertyRef Name="analysis_id" />
+          </Key>
+          <Property Name="analysis_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="acquisition_leasing_fee" Type="Double" />
+          <Property Name="acquisition_leasing_percentage" Type="Double" />
+          <Property Name="syndication_fee" Type="Double" />
+          <Property Name="syndication_percentage" Type="Double" />
+          <Property Name="land_transfer_tax" Type="Double" />
+          <Property Name="land_transfer_percentage" Type="Double" />
+          <Property Name="legal_purchase_lease_fee" Type="Double" />
+          <Property Name="contingency_tenant_improvement_fee" Type="Double" />
+          <Property Name="environmental_fee" Type="Double" />
+          <Property Name="construction_fee" Type="Double" />
+          <Property Name="mortgage_fee" Type="Double" />
+          <Property Name="bcr_fee" Type="Double" />
+          <Property Name="appraisal_fee" Type="Double" />
+          <Property Name="total_closing_fees" Type="Double" />
+          <Property Name="total_acquisition_cost" Type="Double" />
+          <Property Name="mortgage_ltv_cost" Type="Double" />
+          <Property Name="mortgage_ltv_percentage" Type="Double" />
+          <Property Name="twenty_year_interest_rate" Type="Double" />
+          <Property Name="twenty_year_interest_rate_percentage" Type="Double" />
+          <Property Name="twenty_five_year_interest_rate" Type="Double" />
+          <Property Name="twenty_five_year_interest_rate_percentage" Type="Double" />
+          <Property Name="annual_debt_service_twenty_years" Type="Double" />
+          <Property Name="annual_debt_service_twenty_five_years" Type="Double" />
+          <NavigationProperty Name="twenty_five_year_return" Relationship="Self.fk_analysis_return" FromRole="analysis" ToRole="twenty_five_year_return" />
+        </EntityType>
         <EntityType Name="expense">
           <Key>
             <PropertyRef Name="expense_id" />
@@ -67,14 +197,15 @@
           <Property Name="expense_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="expense_cost" Type="Double" Nullable="false" />
           <Property Name="contractor_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="expense_property_id" Type="Int32" />
+          <Property Name="expense_property_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="property" Relationship="Self.fk_property_expense" FromRole="expense" ToRole="property" />
         </EntityType>
         <EntityType Name="property">
           <Key>
             <PropertyRef Name="property_id" />
           </Key>
           <Property Name="property_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="property_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="property_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="city" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="postal_code" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
@@ -84,6 +215,8 @@
           <Property Name="available_space" Type="Int32" Nullable="false" />
           <Property Name="number_of_units" Type="Int32" Nullable="false" />
           <Property Name="parking_spots" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="expenses" Relationship="Self.fk_property_expense" FromRole="property" ToRole="expense" />
+          <NavigationProperty Name="tenants" Relationship="Self.fk_tenant_property" FromRole="property" ToRole="tenant" />
         </EntityType>
         <EntityType Name="tenant">
           <Key>
@@ -99,21 +232,124 @@
           <Property Name="lease_start" Type="DateTime" Nullable="false" />
           <Property Name="lease_end" Type="DateTime" Nullable="false" />
           <Property Name="months_left" Type="Int32" Nullable="false" />
-          <Property Name="tenant_property_id" Type="Int32" />
+          <Property Name="tenant_property_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="property" Relationship="Self.fk_tenant_property" FromRole="tenant" ToRole="property" />
         </EntityType>
-        <EntityContainer Name="jenningsdbEntities" annotation:LazyLoadingEnabled="true">
+        <EntityType Name="twenty_five_year_return">
+          <Key>
+            <PropertyRef Name="return_id" />
+          </Key>
+          <Property Name="return_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="analysis_id" Type="Int32" Nullable="false" />
+          <Property Name="return_year" Type="Int16" />
+          <Property Name="base_rental_revenue" Type="Double" />
+          <Property Name="additional_revenue" Type="Double" />
+          <Property Name="slippage" Type="Double" />
+          <Property Name="total_revenue" Type="Double" />
+          <Property Name="vacancy_bad_debt" Type="Double" />
+          <Property Name="interest_payments" Type="Double" />
+          <Property Name="principal_payments" Type="Double" />
+          <Property Name="total_debt_service" Type="Double" />
+          <Property Name="net_operating_income" Type="Double" />
+          <Property Name="noi_percentage" Type="Double" />
+          <Property Name="internal_rate_of_return_percentage" Type="Double" />
+          <Property Name="cash_on_cash_share" Type="Double" />
+          <Property Name="total_return_share" Type="Double" />
+          <NavigationProperty Name="analysis" Relationship="Self.fk_analysis_return" FromRole="twenty_five_year_return" ToRole="analysis" />
+        </EntityType>
+        <Association Name="fk_analysis_return">
+          <End Role="analysis" Type="Self.analysis" Multiplicity="1" />
+          <End Role="twenty_five_year_return" Type="Self.twenty_five_year_return" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="analysis">
+              <PropertyRef Name="analysis_id" />
+            </Principal>
+            <Dependent Role="twenty_five_year_return">
+              <PropertyRef Name="analysis_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_property_expense">
+          <End Role="property" Type="Self.property" Multiplicity="1" />
+          <End Role="expense" Type="Self.expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="property">
+              <PropertyRef Name="property_id" />
+            </Principal>
+            <Dependent Role="expense">
+              <PropertyRef Name="expense_property_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tenant_property">
+          <End Role="property" Type="Self.property" Multiplicity="1" />
+          <End Role="tenant" Type="Self.tenant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="property">
+              <PropertyRef Name="property_id" />
+            </Principal>
+            <Dependent Role="tenant">
+              <PropertyRef Name="tenant_property_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="jenningsdbEntitiesConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="analyses" EntityType="Self.analysis" />
           <EntitySet Name="expenses" EntityType="Self.expense" />
           <EntitySet Name="properties" EntityType="Self.property" />
           <EntitySet Name="tenants" EntityType="Self.tenant" />
+          <EntitySet Name="twenty_five_year_return" EntityType="Self.twenty_five_year_return" />
+          <AssociationSet Name="fk_analysis_return" Association="Self.fk_analysis_return">
+            <End Role="analysis" EntitySet="analyses" />
+            <End Role="twenty_five_year_return" EntitySet="twenty_five_year_return" />
+          </AssociationSet>
+          <AssociationSet Name="fk_property_expense" Association="Self.fk_property_expense">
+            <End Role="property" EntitySet="properties" />
+            <End Role="expense" EntitySet="expenses" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tenant_property" Association="Self.fk_tenant_property">
+            <End Role="property" EntitySet="properties" />
+            <End Role="tenant" EntitySet="tenants" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="JenningsDBModelStoreContainer" CdmEntityContainer="jenningsdbEntities">
+        <EntityContainerMapping StorageEntityContainer="jenningsdbModelStoreContainer" CdmEntityContainer="jenningsdbEntitiesConnection">
+          <EntitySetMapping Name="analyses">
+            <EntityTypeMapping TypeName="jenningsdbModel.analysis">
+              <MappingFragment StoreEntitySet="analysis">
+                <ScalarProperty Name="analysis_id" ColumnName="analysis_id" />
+                <ScalarProperty Name="acquisition_leasing_fee" ColumnName="acquisition_leasing_fee" />
+                <ScalarProperty Name="acquisition_leasing_percentage" ColumnName="acquisition_leasing_percentage" />
+                <ScalarProperty Name="syndication_fee" ColumnName="syndication_fee" />
+                <ScalarProperty Name="syndication_percentage" ColumnName="syndication_percentage" />
+                <ScalarProperty Name="land_transfer_tax" ColumnName="land_transfer_tax" />
+                <ScalarProperty Name="land_transfer_percentage" ColumnName="land_transfer_percentage" />
+                <ScalarProperty Name="legal_purchase_lease_fee" ColumnName="legal_purchase_lease_fee" />
+                <ScalarProperty Name="contingency_tenant_improvement_fee" ColumnName="contingency_tenant_improvement_fee" />
+                <ScalarProperty Name="environmental_fee" ColumnName="environmental_fee" />
+                <ScalarProperty Name="construction_fee" ColumnName="construction_fee" />
+                <ScalarProperty Name="mortgage_fee" ColumnName="mortgage_fee" />
+                <ScalarProperty Name="bcr_fee" ColumnName="bcr_fee" />
+                <ScalarProperty Name="appraisal_fee" ColumnName="appraisal_fee" />
+                <ScalarProperty Name="total_closing_fees" ColumnName="total_closing_fees" />
+                <ScalarProperty Name="total_acquisition_cost" ColumnName="total_acquisition_cost" />
+                <ScalarProperty Name="mortgage_ltv_cost" ColumnName="mortgage_ltv_cost" />
+                <ScalarProperty Name="mortgage_ltv_percentage" ColumnName="mortgage_ltv_percentage" />
+                <ScalarProperty Name="twenty_year_interest_rate" ColumnName="twenty_year_interest_rate" />
+                <ScalarProperty Name="twenty_year_interest_rate_percentage" ColumnName="twenty_year_interest_rate_percentage" />
+                <ScalarProperty Name="twenty_five_year_interest_rate" ColumnName="twenty_five_year_interest_rate" />
+                <ScalarProperty Name="twenty_five_year_interest_rate_percentage" ColumnName="twenty_five_year_interest_rate_percentage" />
+                <ScalarProperty Name="annual_debt_service_twenty_years" ColumnName="annual_debt_service_twenty_years" />
+                <ScalarProperty Name="annual_debt_service_twenty_five_years" ColumnName="annual_debt_service_twenty_five_years" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="expenses">
-            <EntityTypeMapping TypeName="JenningsDBModel.expense">
+            <EntityTypeMapping TypeName="jenningsdbModel.expense">
               <MappingFragment StoreEntitySet="expense">
                 <ScalarProperty Name="expense_id" ColumnName="expense_id" />
                 <ScalarProperty Name="expense_desc" ColumnName="expense_desc" />
@@ -125,7 +361,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="properties">
-            <EntityTypeMapping TypeName="JenningsDBModel.property">
+            <EntityTypeMapping TypeName="jenningsdbModel.property">
               <MappingFragment StoreEntitySet="property">
                 <ScalarProperty Name="property_id" ColumnName="property_id" />
                 <ScalarProperty Name="property_name" ColumnName="property_name" />
@@ -142,7 +378,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tenants">
-            <EntityTypeMapping TypeName="JenningsDBModel.tenant">
+            <EntityTypeMapping TypeName="jenningsdbModel.tenant">
               <MappingFragment StoreEntitySet="tenant">
                 <ScalarProperty Name="tenant_id" ColumnName="tenant_id" />
                 <ScalarProperty Name="tenant_name" ColumnName="tenant_name" />
@@ -155,6 +391,28 @@
                 <ScalarProperty Name="lease_end" ColumnName="lease_end" />
                 <ScalarProperty Name="months_left" ColumnName="months_left" />
                 <ScalarProperty Name="tenant_property_id" ColumnName="tenant_property_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="twenty_five_year_return">
+            <EntityTypeMapping TypeName="jenningsdbModel.twenty_five_year_return">
+              <MappingFragment StoreEntitySet="twenty_five_year_return">
+                <ScalarProperty Name="return_id" ColumnName="return_id" />
+                <ScalarProperty Name="analysis_id" ColumnName="analysis_id" />
+                <ScalarProperty Name="return_year" ColumnName="return_year" />
+                <ScalarProperty Name="base_rental_revenue" ColumnName="base_rental_revenue" />
+                <ScalarProperty Name="additional_revenue" ColumnName="additional_revenue" />
+                <ScalarProperty Name="slippage" ColumnName="slippage" />
+                <ScalarProperty Name="total_revenue" ColumnName="total_revenue" />
+                <ScalarProperty Name="vacancy_bad_debt" ColumnName="vacancy_bad_debt" />
+                <ScalarProperty Name="interest_payments" ColumnName="interest_payments" />
+                <ScalarProperty Name="principal_payments" ColumnName="principal_payments" />
+                <ScalarProperty Name="total_debt_service" ColumnName="total_debt_service" />
+                <ScalarProperty Name="net_operating_income" ColumnName="net_operating_income" />
+                <ScalarProperty Name="noi_percentage" ColumnName="noi_percentage" />
+                <ScalarProperty Name="internal_rate_of_return_percentage" ColumnName="internal_rate_of_return_percentage" />
+                <ScalarProperty Name="cash_on_cash_share" ColumnName="cash_on_cash_share" />
+                <ScalarProperty Name="total_return_share" ColumnName="total_return_share" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

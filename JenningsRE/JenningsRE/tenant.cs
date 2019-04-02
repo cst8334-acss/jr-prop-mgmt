@@ -24,6 +24,8 @@ namespace JenningsRE
         public System.DateTime lease_start { get; set; }
         public System.DateTime lease_end { get; set; }
         public int months_left { get; set; }
-        public Nullable<int> tenant_property_id { get; set; }
+        public int tenant_property_id { get; set; }
+    
+        public virtual property property { get; set; }
     }
 }
