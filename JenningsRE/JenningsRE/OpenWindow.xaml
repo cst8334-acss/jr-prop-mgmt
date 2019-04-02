@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="OpenWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Property Management" Margin="70,75,0,75" HorizontalAlignment="Left" Width="269" Click="Open_Click"/>
-        <Button Content="Property Analysis" Margin="0,75,70,75" HorizontalAlignment="Right" Width="269" />
+        <Button Content="Property Management" Margin="70,75,0,75" HorizontalAlignment="Left" Width="269" Click="OpenMain_Click"/>
+        <Button Content="Property Analysis" Margin="0,75,70,75" HorizontalAlignment="Right" Width="269" Click="OpenAnalysis_Click"/>
 
     </Grid>
 </Window>

@@ -24,10 +24,17 @@ namespace JenningsRE
             InitializeComponent();
         }
 
-        private void Open_Click(object sender, RoutedEventArgs e)
+        private void OpenMain_Click(object sender, RoutedEventArgs e)
         {
             MainWindow Main = new MainWindow();
             Main.Show();
+            Close();
+        }
+
+        private void OpenAnalysis_Click(object sender, RoutedEventArgs e)
+        {
+            AnalysisWindow Analysis = new AnalysisWindow();
+            Analysis.Show();
             Close();
         }
     }
