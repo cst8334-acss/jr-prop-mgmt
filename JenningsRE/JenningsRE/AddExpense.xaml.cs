@@ -20,14 +20,18 @@ namespace JenningsRE
     /// </summary>
     public partial class AddExpense : Window
     {
-        int property_id;
-        string expenseName, expenseDesc, contractorName, expenseType;
-        double expenseCost;
+        #region Members
+        jenningsdbEntitiesConnection context;
+        ExpenseAccess _expenseAccess;
+        #endregion
 
-        public AddExpense()
+        public AddExpense(jenningsdbEntitiesConnection context, ExpenseAccess expenseAccess)
         {
 
             InitializeComponent();
+            this.context = context;
+            _expenseAccess = expenseAccess;
+
 
             //Add Expense Button
             Button applyBtn = new Button()
@@ -52,7 +56,7 @@ namespace JenningsRE
         /// <param name="e"></param>
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         /// <summary>
@@ -63,25 +67,26 @@ namespace JenningsRE
         private void ApplyBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            expenseName = formExpenseName.Text;
-            expenseCost = Double.Parse(formExpenseCost.Text);
-            expenseDesc = formExpenseDescription.Text;
-            contractorName = formContractorName.Text;
-            expenseType = expTypeOp.IsChecked == true ? expTypeOp.Content.ToString() : expTypeAdm.Content.ToString();
+            //Map Textbox fields to new expense object
+            expense expense = new expense
+            {
+                expense_name = formExpenseName.Text,
+                expense_cost = Double.Parse(formExpenseCost.Text),
+                expense_desc = formExpenseDescription.Text,
+                contractor_name = formContractorName.Text,
+                expense_type = expTypeOp.IsChecked == true ? expTypeOp.Content.ToString() : expTypeAdm.Content.ToString()
+            };
 
-            ExpenseAccess expenseAccess = new ExpenseAccess();
-            expenseAccess.AddExpense(1, expenseName, expenseCost, expenseDesc, contractorName, expenseType);
+            //Add expense to DataGrid and DB
+            _expenseAccess.AddExpense(expense);
 
             Close();
 
             MessageBoxButton mbBtn = MessageBoxButton.OK;
             string header = "Add Expense";
-            string message = $"Expense: {expenseName} has been created.";
+            string message = $"Expense: {expense.expense_name} has been created.";
             MessageBoxImage icon = MessageBoxImage.Information;
             MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
-
-            
-            
         }
 
     }

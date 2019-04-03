@@ -8,42 +8,61 @@ namespace JenningsRE.DAL
 {
     public class ExpenseAccess
     {
+        jenningsdbEntitiesConnection context;
 
-        public ExpenseAccess()
+        public ExpenseAccess(jenningsdbEntitiesConnection context)
         {
-            
+            this.context = context;
         }
 
-        public void AddExpense(int prop_id, string exp_name, double exp_cost, string exp_desc, string contractor_name, string exp_type)
+        /// <summary>
+        /// Add New Expense to the Database
+        /// </summary>
+        /// <param name="prop_id"></param>
+        /// <param name="exp_name"></param>
+        /// <param name="exp_cost"></param>
+        /// <param name="exp_desc"></param>
+        /// <param name="contractor_name"></param>
+        /// <param name="exp_type"></param>
+        public void AddExpense(expense exp)
         {
-            using (jenningsdbEntitiesConnection context = new jenningsdbEntitiesConnection())
-            {
+            //TODO SET PROPERTY_EXPENSE_ID HERE - LE
 
-                expense exp = new expense()
-                {
-                    expense_property_id = prop_id,
-                    expense_name = exp_name,
-                    expense_cost = exp_cost,
-                    expense_desc = exp_desc,
-                    contractor_name = contractor_name,
-                    expense_type = exp_type
-                };
+            context.expenses.Add(exp);
+            context.SaveChanges();
 
-                context.expenses.Add(exp);
-                context.SaveChanges();
+            MainWindow.expenseDataGrid.ItemsSource = context.expenses.ToList();
 
-            }
         }
 
-
+        /// <summary>
+        /// Gets a List of expenses related to the supplied property id.
+        /// </summary>
+        /// <param name="property_id"></param>
+        /// <returns>List of type expense</returns>
         public List<expense> GetExpenses(int property_id)
         {
-            using (jenningsdbEntitiesConnection context = new jenningsdbEntitiesConnection()){
+            var propExpenses = from e in context.expenses
+                               where e.expense_property_id == property_id
+                               select e;
 
-            }
+            return propExpenses.ToList();
+        }
 
+        /// <summary>
+        /// Deletes the passed Expense object from DataGrid and DB
+        /// </summary>
+        /// <param name="exp"></param>
+        public void RemoveExpense(expense exp)
+        {
+            var delExp = (from ex in context.expenses
+                          where ex.expense_id == exp.expense_id
+                          select ex).Single();
 
-            return null;
+            context.expenses.Remove(delExp);
+            context.SaveChanges();
+
+            MainWindow.expenseDataGrid.ItemsSource = context.expenses.ToList();
         }
 
     }

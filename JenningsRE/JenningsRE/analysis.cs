@@ -10,14 +10,14 @@
 namespace JenningsRE
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class analysis
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public analysis()
         {
-            this.twenty_five_year_return = new HashSet<twenty_five_year_return>();
+            this.twenty_five_year_return = new ObservableCollection<twenty_five_year_return>();
         }
     
         public int analysis_id { get; set; }
@@ -46,6 +46,6 @@ namespace JenningsRE
         public Nullable<double> annual_debt_service_twenty_five_years { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<twenty_five_year_return> twenty_five_year_return { get; set; }
+        public virtual ObservableCollection<twenty_five_year_return> twenty_five_year_return { get; set; }
     }
 }
