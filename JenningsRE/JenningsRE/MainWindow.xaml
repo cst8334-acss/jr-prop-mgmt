@@ -57,7 +57,7 @@
                         <ColumnDefinition Width="57*"/>
                     </Grid.ColumnDefinitions>
                     <ComboBox HorizontalAlignment="Left" Margin="443,50,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Button Content="New" Name="addTenantBtn" HorizontalAlignment="Left" Margin="450,100,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.909,-2.042"  Grid.Column="1"/>
+                    <Button Content="New" Name="addTenantBtn" HorizontalAlignment="Left" Margin="450,100,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.909,-2.042"  Grid.Column="1" Click="AddTenantBtn_Click"/>
                     <Button Content="Delete" HorizontalAlignment="Left" Margin="450,200,0,0" VerticalAlignment="Top" Width="75" Name="DeleteTenantBtn"  Grid.Column="1"/>
                     <Button Content="Save" HorizontalAlignment="Left" Margin="450,150,0,0" VerticalAlignment="Top" Width="75" x:Name="SaveBtn" Grid.Column="1" />
                     <TextBox HorizontalAlignment="Left" Height="23" Margin="170,50,0,0" TextWrapping="Wrap" Text="{Binding TenantName}" VerticalAlignment="Top" Width="120" x:Name="formTenantName" Grid.Column="1"/>

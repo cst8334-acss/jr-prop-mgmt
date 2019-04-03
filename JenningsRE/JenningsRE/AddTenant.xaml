@@ -5,19 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JenningsRE"
         mc:Ignorable="d"
-        Title="New Tenant" Height="400" Width="400">
+        Title="New Tenant" Height="500" Width="420">
     <Grid>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="15,208,0,0" VerticalAlignment="Top" Width="75" Name="SaveBtn" />
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="127,208,0,0" VerticalAlignment="Top" Width="75" Name="CancelBtn" />
+        <Button Content="Save" HorizontalAlignment="Left" Margin="15,390,0,0" VerticalAlignment="Top" Width="75" Name="SaveBtn" Click="SaveBtn_Click" />
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="127,390,0,0" VerticalAlignment="Top" Width="75" Name="CancelBtn" />
 
         <TextBox HorizontalAlignment="Left" Height="23" Margin="127,20,0,0" TextWrapping="Wrap" Text="{Binding TenantName}" VerticalAlignment="Top" Width="120" Name="formTenantName"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,65,0,0" TextWrapping="Wrap" Text="{Binding UnitNumber}" VerticalAlignment="Top" Width="120" Name="formUnitForm"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,110,0,0" TextWrapping="Wrap" Text="{Binding SquareFeet}" VerticalAlignment="Top" Width="120" Name="formSquareFeet"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,155,0,0" TextWrapping="Wrap" Text="{Binding RentPerSF}" VerticalAlignment="Top" Width="120" Name="formRent"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,60,0,0" TextWrapping="Wrap" Text="{Binding UnitNumber}" VerticalAlignment="Top" Width="120" Name="formUnitForm"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,100,0,0" TextWrapping="Wrap" Text="{Binding SquareFeet}" VerticalAlignment="Top" Width="120" Name="formSquareFeet"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,140,0,0" TextWrapping="Wrap" Text="{Binding RentPerSF}" VerticalAlignment="Top" Width="120" Name="formRent"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,180,0,0" TextWrapping="Wrap" Text="{Binding MonthlyRent}" VerticalAlignment="Top" Width="120" x:Name="formMonthly"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,220,0,0" TextWrapping="Wrap" Text="{Binding AnnualRent}" VerticalAlignment="Top" Width="120" x:Name="formAnnual"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,340,0,0" TextWrapping="Wrap" Text="{Binding MonthsLeft}" VerticalAlignment="Top" Width="120" x:Name="formMonthsLeft"/>
+
 
         <Label Content="Tenant Name" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
-        <Label Content="Unit #" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top"/>
-        <Label Content="Square feet" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top"/>
-        <Label Content="Rent per SF" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top"/>
+        <Label Content="Unit #" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
+        <Label Content="Square feet" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
+        <Label Content="Rent per SF" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
+        <Label Content="Monthly Rent" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top"/>
+        <Label Content="Annual Rent" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top"/>
+        <Label Content="Lease Start" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top"/>
+        <Label Content="Lease End" HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top"/>
+        <Label Content="Months Left" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top"/>
+
+        <DatePicker HorizontalAlignment="Left" Margin="127,260,0,0" VerticalAlignment="Top" Text="{Binding LeaseStart}"/>
+        <DatePicker HorizontalAlignment="Left" Margin="127,300,0,0" VerticalAlignment="Top" Text="{Binding LeaseEnd}"/>
+        
     </Grid>
 </Window>

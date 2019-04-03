@@ -31,5 +31,11 @@ namespace JenningsRE
             Analysis.Show();
             Close();
         }
+
+        private void AddTenantBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddTenant Tenant = new AddTenant();
+            Tenant.Show();
+        }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using JenningsRE.DAL;
 
 namespace JenningsRE
 {
@@ -19,9 +20,25 @@ namespace JenningsRE
     /// </summary>
     public partial class AddTenant : Window
     {
+        private string TenantName;
         public AddTenant()
         {
             InitializeComponent();
+            TenantName = formTenantName.Text;
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TenantAccess tenant = new TenantAccess();
+            tenant.AddNewTenant(1);
+            MessageBox.Show("Tenant added");
+
+            //tenant.GetAllTenants(1);
+
+            //tenant.UpdateTenant(1);
+
+            //tenant.DeleteTenant(1);
+            //MessageBox.Show("Tenant Deleted");
         }
     }
 }
