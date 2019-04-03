@@ -23,8 +23,34 @@ namespace JenningsRE
         public MainWindow()
         {
             InitializeComponent();
+
+
+            //Expense Tab Logic
+
+            //Add Expense Button
+            Button addExpenseBtn = new Button
+            {
+                Name = "addExpenseBtn"
+            };
+            addExpenseBtn.Click += AddExpenseBtn_Click;
         }
 
+        /// <summary>
+        /// Display Pop-up Add Expense Window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddExpenseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddExpense addWindow = new AddExpense();
+            addWindow.ShowDialog();
+        }
+
+        /// <summary>
+        /// Switch view to Analysis
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void switchScreen(object sender, RoutedEventArgs e)
         {
             AnalysisWindow Analysis = new AnalysisWindow();

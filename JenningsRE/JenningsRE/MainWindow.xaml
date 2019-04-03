@@ -108,7 +108,7 @@
                     </TabControl>
                     <Button Content="Edit" HorizontalAlignment="Left" Margin="277,120,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3"/>
                     <Button Content="Delete"  HorizontalAlignment="Left" Margin="407,120,0,0" VerticalAlignment="Top" Width="75" Name="deleteExpenseBtn" Grid.Column="3"/>
-                    <Button Content="Add"  HorizontalAlignment="Left" Margin="147,120,0,0" VerticalAlignment="Top" Width="75" Name="addExpenseBtn" Grid.Column="3"/>
+                    <Button Content="Add"  Click="AddExpenseBtn_Click" HorizontalAlignment="Left" Margin="147,120,0,0" VerticalAlignment="Top" Width="75" Name="addExpenseBtn" Grid.Column="3"/>
                 </Grid>
 
             </TabItem>

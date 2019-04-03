@@ -20,6 +20,7 @@ namespace JenningsRE
         public double expense_cost { get; set; }
         public string contractor_name { get; set; }
         public int expense_property_id { get; set; }
+        public string expense_name { get; set; }
     
         public virtual property property { get; set; }
     }
