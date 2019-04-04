@@ -82,9 +82,9 @@
                         <ColumnDefinition Width="14*"/>
                         <ColumnDefinition Width="556*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Content="Edit" Click="UpdateExpenseBtn_Click" HorizontalAlignment="Left" Margin="445.2,186,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3"/>
-                    <Button Content="Delete"  Click="DeleteExpenseBtn_Click" HorizontalAlignment="Left" Margin="445.2,238,0,0" VerticalAlignment="Top" Width="75" Name="deleteExpenseBtn" Grid.Column="3"/>
-                    <Button Content="Add"  Click="AddExpenseBtn_Click" HorizontalAlignment="Left" Margin="445.2,136,0,0" VerticalAlignment="Top" Width="75" Name="addExpenseBtn" Grid.Column="3"/>
+                    <Button Content="Edit" Click="UpdateExpenseBtn_Click" HorizontalAlignment="Left" Margin="458.2,190,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3"/>
+                    <Button Content="Delete"  Click="DeleteExpenseBtn_Click" HorizontalAlignment="Left" Margin="458.2,239,0,0" VerticalAlignment="Top" Width="75" Name="deleteExpenseBtn" Grid.Column="3" RenderTransformOrigin="1.948,2.205"/>
+                    <Button Content="Add"  Click="AddExpenseBtn_Click" HorizontalAlignment="Left" Margin="458.2,138,0,0" VerticalAlignment="Top" Width="75" Name="addExpenseBtn" Grid.Column="3"/>
                     <DataGrid x:Name="expDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,98,115.8,33.6" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.ColumnSpan="4">
                         <DataGrid.Columns>
                             <DataGridTextColumn x:Name="expense_idColumn" Binding="{Binding expense_id}" Header="Id" Width="SizeToHeader"/>
