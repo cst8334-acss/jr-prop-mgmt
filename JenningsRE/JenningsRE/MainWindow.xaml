@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:JenningsRE"
         mc:Ignorable="d"
         Title="ACS Property Manager" Height="450" Width="800">
+    <Window.Resources>
+        <CollectionViewSource x:Key="expenseViewSource" d:DesignSource="{d:DesignInstance {x:Type local:expense}, CreateList=True}"/>
+    </Window.Resources>
     <Grid Background="#FF847878">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -26,8 +29,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TabControl HorizontalAlignment="Left" Height="410" Margin="140,10,-2,-1" VerticalAlignment="Top" Width="654">
-            <TabItem Header="Property">
+        <TabControl Name="TabController" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}" HorizontalAlignment="Left" Height="410" Margin="140,10,-2,-1" VerticalAlignment="Top" Width="654">
+            <TabItem Header="Property" x:Name="PropertyTab">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="31*"/>
@@ -50,7 +53,7 @@
                     <Label Content="Number of Units" HorizontalAlignment="Left" Margin="105,255,0,0" VerticalAlignment="Top" Grid.Column="2"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Tenant">
+            <TabItem Header="Tenant" x:Name="TenantTab">
                 <Grid Background="#FFE5E5E5" Margin="0,0,-0.2,0.2" HorizontalAlignment="Left" Width="649">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
@@ -71,44 +74,27 @@
                     <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="425,50,0,0" VerticalAlignment="Top" Width="120"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Expenses">
-                <Grid Background="#FFE5E5E5">
+            <TabItem Header="Expenses" x:Name="ExpenseTab">
+                <Grid Background="#FFE5E5E5" DataContext="{StaticResource expenseViewSource}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="66*"/>
                         <ColumnDefinition Width="13*"/>
                         <ColumnDefinition Width="14*"/>
                         <ColumnDefinition Width="556*"/>
                     </Grid.ColumnDefinitions>
-                    <TabControl HorizontalAlignment="Left" Height="600" Margin="144.8,-50,0,-158" VerticalAlignment="Top" Width="176" RenderTransformOrigin="0.5,0.5" Grid.Column="3">
-                        <TabControl.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-90"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </TabControl.RenderTransform>
-                        <TabItem Header="Operational">
-                            <Grid Background="#FFE5E5E5">
-                                <DataGrid HorizontalAlignment="Left" Height="142" Margin="-186,218,-183.6,0" VerticalAlignment="Top" Width="540" Name="ExpenseGrid" ItemsSource="{Binding}" RenderTransformOrigin="0.5,0.5">
-                                    <DataGrid.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform/>
-                                            <SkewTransform/>
-                                            <RotateTransform Angle="90"/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </DataGrid.RenderTransform>
-                                </DataGrid>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="Administrative">
-                            <Grid Background="#FFE5E5E5"/>
-                        </TabItem>
-                    </TabControl>
-                    <Button Content="Edit" HorizontalAlignment="Left" Margin="277,120,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3"/>
-                    <Button Content="Delete"  HorizontalAlignment="Left" Margin="407,120,0,0" VerticalAlignment="Top" Width="75" Name="deleteExpenseBtn" Grid.Column="3"/>
-                    <Button Content="Add"  HorizontalAlignment="Left" Margin="147,120,0,0" VerticalAlignment="Top" Width="75" Name="addExpenseBtn" Grid.Column="3"/>
+                    <Button Content="Edit" Click="UpdateExpenseBtn_Click" HorizontalAlignment="Left" Margin="458.2,190,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3"/>
+                    <Button Content="Delete"  Click="DeleteExpenseBtn_Click" HorizontalAlignment="Left" Margin="458.2,239,0,0" VerticalAlignment="Top" Width="75" Name="deleteExpenseBtn" Grid.Column="3" RenderTransformOrigin="1.948,2.205"/>
+                    <Button Content="Add"  Click="AddExpenseBtn_Click" HorizontalAlignment="Left" Margin="458.2,138,0,0" VerticalAlignment="Top" Width="75" Name="addExpenseBtn" Grid.Column="3"/>
+                    <DataGrid x:Name="expDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,98,115.8,33.6" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.ColumnSpan="4">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="expense_idColumn" Binding="{Binding expense_id}" Header="Id" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="expense_nameColumn" Binding="{Binding expense_name}" Header="Name" Width="100"/>
+                            <DataGridTextColumn x:Name="expense_costColumn" Binding="{Binding expense_cost}" Header="Cost" Width="60"/>
+                            <DataGridTextColumn x:Name="contractor_nameColumn" Binding="{Binding contractor_name}" Header="Contractor" Width="80"/>
+                            <DataGridTextColumn x:Name="expense_descColumn" Binding="{Binding expense_desc}" Header="Description" Width="173"/>
+                            <DataGridTextColumn x:Name="expense_typeColumn" Binding="{Binding expense_type}" Header="Type" Width="80"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
 
             </TabItem>

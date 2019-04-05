@@ -10,15 +10,15 @@
 namespace JenningsRE
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class property
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public property()
         {
-            this.expenses = new HashSet<expense>();
-            this.tenants = new HashSet<tenant>();
+            this.expenses = new ObservableCollection<expense>();
+            this.tenants = new ObservableCollection<tenant>();
         }
     
         public int property_id { get; set; }
@@ -34,8 +34,8 @@ namespace JenningsRE
         public string parking_spots { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<expense> expenses { get; set; }
+        public virtual ObservableCollection<expense> expenses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tenant> tenants { get; set; }
+        public virtual ObservableCollection<tenant> tenants { get; set; }
     }
 }
