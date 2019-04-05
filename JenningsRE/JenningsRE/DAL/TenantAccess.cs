@@ -10,6 +10,13 @@ namespace JenningsRE.DAL
 {
     class TenantAccess
     {
+        private jenningsdbEntitiesConnection contex;
+
+        public TenantAccess(jenningsdbEntitiesConnection contex)
+        {
+            this.contex = contex;
+        }
+
        /// <summary>
        /// Preforms Create operation for Database
        /// </summary>

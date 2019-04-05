@@ -28,6 +28,7 @@ namespace JenningsRE
         public static DataGrid expenseDataGrid;
 
         ExpenseAccess _expenseAccess;
+        TenantAccess _tenantAccess;
 
         public MainWindow()
         {
@@ -35,6 +36,7 @@ namespace JenningsRE
             LoadGrid();
 
             _expenseAccess = new ExpenseAccess(context);
+            _tenantAccess = new TenantAccess(context);
 
             DataContext = this;
 
@@ -65,6 +67,9 @@ namespace JenningsRE
             };
             deleteExpenseBtn.Click += DeleteExpenseBtn_Click;
 
+            #endregion
+
+            #region 
             #endregion
         }
 

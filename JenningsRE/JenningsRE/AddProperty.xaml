@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Add Property" Height="450" Width="800">
     <Grid>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="10,368,0,0" VerticalAlignment="Top" Width="75" Name="SaveButton" />
+        <Button Content="Save" HorizontalAlignment="Left" Margin="10,368,0,0" VerticalAlignment="Top" Width="75" Name="SaveButton" Click="SaveButton_Click" />
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="127,368,0,0" VerticalAlignment="Top" Width="75" Name="CancelBtn" />
 
         <TextBox HorizontalAlignment="Left" Height="23" Margin="127,20,0,0" TextWrapping="Wrap" Text="{Binding PropertyName}" VerticalAlignment="Top" Width="120" Name="formPropertyName"/>
