@@ -124,6 +124,9 @@
     <Compile Include="UpdateExpense.xaml.cs">
       <DependentUpon>UpdateExpense.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateTenant.xaml.cs">
+      <DependentUpon>UpdateTenant.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddExpense.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UpdateExpense.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateTenant.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

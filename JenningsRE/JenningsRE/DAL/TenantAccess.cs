@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,11 @@ using System.Windows.Media.Media3D;
 
 namespace JenningsRE.DAL
 {
-    class TenantAccess
+    /// <summary>
+    /// @author Vijay Abhichandani
+    /// This Class has all the logic for tenant CRUD operation
+    /// </summary>
+    public class TenantAccess
     {
         private jenningsdbEntitiesConnection contex;
 
@@ -17,70 +22,43 @@ namespace JenningsRE.DAL
             this.contex = contex;
         }
 
-       /// <summary>
-       /// Preforms Create operation for Database
-       /// </summary>
-       /// <param name="propertyid"></param>
-       /// <param name="tenant_name"></param>
-       /// <param name="unit_number"></param>
-       /// <param name="unit_size_sqft"></param>
-       /// <param name="rent_per_sf"></param>
-       /// <param name="monthly_rent"></param>
-       /// <param name="annual_rent"></param>
-       /// <param name="lease_start"></param>
-       /// <param name="lease_end"></param>
-       /// <param name="months_left"></param>
-        public void AddNewTenant(int propertyid, string tenant_name, int unit_number, double unit_size_sqft, double rent_per_sf, double monthly_rent, double annual_rent, DateTime lease_start, DateTime lease_end, int months_left)
+        /// <summary>
+        /// adding the new tenant
+        /// </summary>
+        /// <param name="tenant"></param>
+        public void AddNewTenant(tenant tenant)
+       {
+           //TODO SET PROPERTY_EXPENSE_ID HERE - LE
+           contex.tenants.Add(tenant);
+           contex.SaveChanges();
+           MainWindow.TenantDataGrid.ItemsSource = contex.tenants.ToList();
+       }
+
+        /// <summary>
+        /// getting all the tenant details based on property
+        /// </summary>
+        /// <param name="propertyId"></param>
+        /// <returns></returns>
+        public List<tenant> GetTenants(int propertyId)
         {
-            using (jenningsdbEntitiesConnection context = new jenningsdbEntitiesConnection())
-            {
-                tenant tenant = new tenant()
-                {
-                    tenant_name = tenant_name,
-                    unit_number = unit_number,
-                    unit_size_sqft = unit_size_sqft,
-                    rent_per_sf = rent_per_sf,
-                    monthly_rent = monthly_rent,
-                    annual_rent = annual_rent,
-                    lease_start = lease_start,
-                    lease_end = lease_end,
-                    months_left = months_left,
-                    tenant_property_id = propertyid
-                };
-                context.tenants.Add(tenant);
-                context.SaveChanges();
-            }
+            var propTenants = from t in contex.tenants
+               where t.tenant_property_id == propertyId
+                select t;
+            return propTenants.ToList();
         }
 
-
-        public List<tenant> GetAllTenants(int propertyid)
+        /// <summary>
+        /// Deleting the tenant
+        /// </summary>
+        /// <param name="tenant"></param>
+        public void DeleteTenant(tenant tenant)
         {
-            using (jenningsdbEntitiesConnection context = new jenningsdbEntitiesConnection())
-            {
-                tenant tenant = context.tenants.FirstOrDefault(t => t.tenant_name == "Vijay");
-                MessageBox.Show(tenant.lease_start.ToString());
-            }
-            return null;
-        }
-
-        public void UpdateTenant(int propertyid)
-        {
-            using (jenningsdbEntitiesConnection context = new jenningsdbEntitiesConnection())
-            {
-                tenant tenant = context.tenants.FirstOrDefault(t => t.tenant_property_id == 1);
-                tenant.tenant_name = "Liam";
-                context.SaveChanges();
-                MessageBox.Show(tenant.tenant_name);
-            }
-
-        }
-        public void DeleteTenant(int propertyid, string tenant_name, int unit_number, double unit_size_sqft, double rent_per_sf, double monthly_rent, double annual_rent, string lease_start, string lease_end, int months_left)
-        {
-            using (jenningsdbEntitiesConnection context = new jenningsdbEntitiesConnection())
-            {
-                tenant tenant = context.tenants.Find(propertyid);
-                context.tenants.Remove(tenant);
-            }
+            var delTenant = (from t in contex.tenants
+                where t.tenant_id == tenant.tenant_id
+                select t).Single();
+            contex.tenants.Remove(delTenant);
+            contex.SaveChanges();
+            MainWindow.TenantDataGrid.ItemsSource = contex.tenants.ToList();
         }
 
     }

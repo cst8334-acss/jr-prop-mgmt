@@ -43,7 +43,7 @@ namespace JenningsRE
 
         private expense GetSelectedExpense()
         {
-            return MainWindow.expenseDataGrid.SelectedItem as expense;
+          return MainWindow.ExpenseDataGrid.SelectedItem as expense;
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace JenningsRE
             editExp.expense_type = expTypeOp.IsChecked == true ? expTypeOp.Content.ToString() : expTypeAdm.Content.ToString();
 
             context.SaveChanges();
-            MainWindow.expenseDataGrid.ItemsSource = context.expenses.ToList();
+            MainWindow.ExpenseDataGrid.ItemsSource = context.expenses.ToList();
 
             MessageBoxButton mbBtn = MessageBoxButton.OK;
             string header = "Update Expense";

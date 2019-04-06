@@ -22,10 +22,13 @@ namespace JenningsRE
     /// </summary>
     public partial class MainWindow : Window
     {
-        int property_id;
         
+        //Initialization of connection
         jenningsdbEntitiesConnection context = new jenningsdbEntitiesConnection();
-        public static DataGrid expenseDataGrid;
+
+        //Datagrids for each tab
+        public static DataGrid ExpenseDataGrid;
+        public static DataGrid TenantDataGrid;
 
         ExpenseAccess _expenseAccess;
         TenantAccess _tenantAccess;
@@ -41,7 +44,6 @@ namespace JenningsRE
             DataContext = this;
 
             //TODO Set this Dynamically.
-            property_id = 1;
 
 
             #region ExpenseTabLogic
@@ -69,10 +71,32 @@ namespace JenningsRE
 
             #endregion
 
-            #region 
-            #endregion
-        }
+            #region TenantTabLogic
 
+            //Add Expense Button
+            Button addTenantBtn = new Button
+            {
+                Name = "addExpenseBtn"
+            };
+            addExpenseBtn.Click += AddTenantBtn_Click;
+
+            //Update Expense Button
+            Button updateTenantBtn = new Button
+            {
+                Name = "updateExpenseBtn"
+            };
+            updateExpenseBtn.Click += UpdateTenantBtn_Click;
+
+            //Delete Expense Button
+            Button deleteTenantBtn = new Button
+            {
+                Name = "deleteExpenseBtn"
+            };
+            deleteExpenseBtn.Click += DeleteTenantBtn_Click;
+
+            #endregion
+
+        }
 
 
         #region ExpenseTabHandlers
@@ -85,7 +109,7 @@ namespace JenningsRE
         {
             AddExpense addWindow = new AddExpense(context,_expenseAccess);
             addWindow.ShowDialog();
-
+            expDataGrid.Items.Refresh();
         }
 
         /// <summary>
@@ -97,6 +121,7 @@ namespace JenningsRE
         {
             UpdateExpense upWindow = new UpdateExpense();
             upWindow.ShowDialog();
+            expDataGrid.Items.Refresh();
         }
 
         /// <summary>
@@ -106,17 +131,20 @@ namespace JenningsRE
         /// <param name="e"></param>
         private void DeleteExpenseBtn_Click(object sender, RoutedEventArgs e)
         {
-            expense exp = expenseDataGrid.SelectedItem as expense;
+            expense exp = ExpenseDataGrid.SelectedItem as expense;
             _expenseAccess.RemoveExpense(exp);
-
+            expDataGrid.Items.Refresh();
         }
         /// <summary>
-        /// Load the Expenses DataGrid
+        /// Load the DataGrids for each tab
         /// </summary>
         private void LoadGrid()
         {
             expDataGrid.ItemsSource = context.expenses.ToList();
-            expenseDataGrid = expDataGrid;
+            ExpenseDataGrid = expDataGrid;
+
+            TenantGrid.ItemsSource = context.tenants.ToList();
+            TenantDataGrid = TenantGrid;
         }
 
         #endregion
@@ -132,12 +160,42 @@ namespace JenningsRE
             Close();
         }
 
+        /// <summary>
+        /// This will open the add new tenant window on the click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddTenantBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddTenant Tenant = new AddTenant();
-            Tenant.Show();
+            AddTenant Tenant = new AddTenant(context, _tenantAccess);
+            Tenant.ShowDialog();
+            TenantGrid.Items.Refresh();
         }
-        
+
+        /// <summary>
+        /// This will delete the tenant from database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteTenantBtn_Click(object sender, RoutedEventArgs e)
+        {
+            tenant tenant = TenantDataGrid.SelectedItem as tenant;
+            _tenantAccess.DeleteTenant(tenant);
+            MessageBox.Show("Tenant Deleted");
+            TenantGrid.Items.Refresh();
+        }
+
+        /// <summary>
+        /// This will update the tenant in database and in data grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateTenantBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateTenant tenant = new UpdateTenant();
+            tenant.ShowDialog();
+            TenantGrid.Items.Refresh();
+        }
     }
 
 }

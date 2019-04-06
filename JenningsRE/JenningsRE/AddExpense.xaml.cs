@@ -23,6 +23,7 @@ namespace JenningsRE
         #region Members
         jenningsdbEntitiesConnection context;
         ExpenseAccess _expenseAccess;
+        private int property_id = 1;
         #endregion
 
         public AddExpense(jenningsdbEntitiesConnection context, ExpenseAccess expenseAccess)
@@ -75,7 +76,8 @@ namespace JenningsRE
                 expense_cost = Double.Parse(formExpenseCost.Text),
                 expense_desc = formExpenseDescription.Text,
                 contractor_name = formContractorName.Text,
-                expense_type = expTypeOp.IsChecked == true ? expTypeOp.Content.ToString() : expTypeAdm.Content.ToString()
+                expense_type = expTypeOp.IsChecked == true ? expTypeOp.Content.ToString() : expTypeAdm.Content.ToString(),
+                expense_property_id = property_id
             };
 
             //Add expense to DataGrid and DB
@@ -90,5 +92,9 @@ namespace JenningsRE
             MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
         }
 
+        private void CancelBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
