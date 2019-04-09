@@ -382,6 +382,58 @@ namespace JenningsRE
             TenantGrid.Items.Refresh();
         }
 
+        /// <summary>
+        /// Filter Tenant Grid by Input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FilterTenantBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var filteredTenants = new List<tenant>();
+
+            var filterType = formTenantFilterComboBox.SelectedIndex;
+
+            switch (filterType)
+            {
+                case 0:
+                    {
+                        var ft = (from t in context.tenants
+                                  where t.tenant_name.Contains(formTenantFilter.Text)
+                                  select t).ToList();
+
+                        filteredTenants.AddRange(ft);
+
+                        break;
+                    }
+                case 1:
+                    {
+                        var unitNum = int.Parse(formTenantFilter.Text);
+
+                        var ft = (from t in context.tenants
+                                  where t.unit_number == unitNum
+                                  select t).ToList();
+
+                        filteredTenants.AddRange(ft);
+
+                        break;
+                    }
+                default:
+                    break;
+            }
+
+            TenantDataGrid.ItemsSource = filteredTenants;
+        }
+
+        /// <summary>
+        /// Clear Filters from Tenant Grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClearTenantFilterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TenantDataGrid.ItemsSource = _tenantAccess.GetTenants(property_id);
+        }
+
         #endregion
 
         /// <summary>
