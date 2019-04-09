@@ -68,19 +68,34 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="57*"/>
                     </Grid.ColumnDefinitions>
-                    <ComboBox HorizontalAlignment="Left" Margin="443,50,0,0" VerticalAlignment="Top" Width="120"/>
-                    <Button Content="New" Name="addTenantBtn" HorizontalAlignment="Left" Margin="450,100,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.909,-2.042"  Grid.Column="1"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="450,200,0,0" VerticalAlignment="Top" Width="75" Name="DeleteTenantBtn"  Grid.Column="1"/>
-                    <Button Content="Save" HorizontalAlignment="Left" Margin="450,150,0,0" VerticalAlignment="Top" Width="75" x:Name="SaveBtn" Grid.Column="1" />
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="170,50,0,0" TextWrapping="Wrap" Text="{Binding TenantName}" VerticalAlignment="Top" Width="120" x:Name="formTenantName" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="170,100,0,0" TextWrapping="Wrap" Text="{Binding UnitNumber}" VerticalAlignment="Top" Width="120" x:Name="formUnitForm" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="170,150,0,0" TextWrapping="Wrap" Text="{Binding SquareFeet}" VerticalAlignment="Top" Width="120" x:Name="formSquareFeet" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="170,200,0,0" TextWrapping="Wrap" Text="{Binding RentPerSF}" VerticalAlignment="Top" Width="120" x:Name="formRent" Grid.Column="1"/>
-                    <Label Content="Tenant Name" HorizontalAlignment="Left" Margin="50,50,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label Content="Unit #" HorizontalAlignment="Left" Margin="50,100,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label Content="Square feet" HorizontalAlignment="Left" Margin="50,150,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label Content="Rent per SF" HorizontalAlignment="Left" Margin="50,200,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="425,50,0,0" VerticalAlignment="Top" Width="120"/>
+                    
+                    <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="32,20,0,0" VerticalAlignment="Top" Width="120"/>
+
+                    <Button Content="New" Name="AddTenantBtn" HorizontalAlignment="Left" Margin="203.4,22,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.909,-2.042"  Grid.Column="1" Click="AddTenantBtn_Click"/>
+                    <Button Content="Delete" HorizontalAlignment="Left" Margin="150,327,0,0" VerticalAlignment="Top" Width="75" Name="DeleteTenantBtn"  Grid.Column="1"/>
+                    <Button Content="Save" HorizontalAlignment="Left" Margin="40,327,0,0" VerticalAlignment="Top" Width="75" x:Name="SaveBtn" Grid.Column="1" />
+                  
+                    <Label Content="Tenant Name" HorizontalAlignment="Left" Margin="32,65,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label Content="Unit #" HorizontalAlignment="Left" Margin="32,115,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label Content="Square feet" HorizontalAlignment="Left" Margin="32,165,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label Content="Rent per SF" HorizontalAlignment="Left" Margin="32,215,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label Content="Monthly Rent" HorizontalAlignment="Left" Margin="32,265,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label Content="Yearly Rent" HorizontalAlignment="Left" Margin="350,65,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label Content="Lease Start" HorizontalAlignment="Left" Margin="350,115,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label Content="Lease End" HorizontalAlignment="Left" Margin="350,165,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <Label Content="Months Left" HorizontalAlignment="Left" Margin="350,215,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="163,65,0,0" TextWrapping="Wrap" Text="{Binding TenantName}" VerticalAlignment="Top" Width="120" x:Name="formTenantName" Grid.Column="1"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="163,115,0,0" TextWrapping="Wrap" Text="{Binding UnitNumber}" VerticalAlignment="Top" Width="120" x:Name="formUnitForm" Grid.Column="1"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="163,165,0,0" TextWrapping="Wrap" Text="{Binding SquareFeet}" VerticalAlignment="Top" Width="120" x:Name="formSquareFeet" Grid.Column="1"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="163,215,0,0" TextWrapping="Wrap" Text="{Binding RentPerSF}" VerticalAlignment="Top" Width="120" x:Name="formRent" Grid.Column="1"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="163,265,0,0" TextWrapping="Wrap" Text="{Binding MonthlyRent}" VerticalAlignment="Top" Width="120" x:Name="formMonthly" Grid.Column="1"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="450,65,0,0" TextWrapping="Wrap" Text="{Binding YearlyRent}" VerticalAlignment="Top" Width="120" x:Name="formYearly" Grid.Column="1"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="450,215,0,0" TextWrapping="Wrap" Text="{Binding MonthLeft}" VerticalAlignment="Top" Width="120" x:Name="formMonthsLeft" Grid.Column="1"/>
+
+                    <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="450,115,0,0" DisplayDate="{Binding LeaseStart}"/>
+                    <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="450,165,0,0" DisplayDate="{Binding LeaseEnd}"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Expenses" x:Name="ExpenseTab">

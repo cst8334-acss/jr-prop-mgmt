@@ -282,4 +282,12 @@ namespace JenningsRE
         #endregion
     }
 
+
+        private void AddTenantBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddTenant Tenant = new AddTenant();
+            Tenant.Show();
+        }
+        
+    }
 }

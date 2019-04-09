@@ -61,6 +61,7 @@ namespace JenningsRE
             Close();
         }
 
+
         /// <summary>
         /// Creates expense based on provided fields.
         /// </summary>
