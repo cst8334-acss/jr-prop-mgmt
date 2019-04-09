@@ -1,0 +1,23 @@
+﻿<Window x:Class="JenningsRE.AddExpense"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JenningsRE"
+        mc:Ignorable="d"
+        Title="Add Expense" Height="265" Width="400">
+    <Grid>
+        <Button Content="Apply"  Click="ApplyBtn_Click" HorizontalAlignment="Left" Margin="199,185,0,0" VerticalAlignment="Top" Width="75" Name="ApplyBtn" RenderTransformOrigin="1.271,0.502"/>
+        <Button Content="Cancel"  HorizontalAlignment="Left" Margin="295,185,0,0" VerticalAlignment="Top" Width="75" Name="CancelBtn"/>
+        <RadioButton GroupName="expenseType" Name="expTypeOp" Content="Operational"  IsChecked="True" HorizontalAlignment="Left" Margin="199,95,0,0" VerticalAlignment="Top"/>
+        <RadioButton GroupName="expenseType" Name="expTypeAdm" Content="Administrative" HorizontalAlignment="Left" Margin="199,116,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="formExpenseName" HorizontalAlignment="Left" Height="23" Margin="42,34,0,0" TextWrapping="Wrap" Text="{Binding expenseName}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="formExpenseCost" HorizontalAlignment="Left" Height="23" Margin="42,88,0,0" TextWrapping="Wrap" Text="{Binding expenseCost}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="formContractorName" HorizontalAlignment="Left" Height="23" Margin="42,142,0,0" TextWrapping="Wrap" Text="{Binding contractorName}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="formExpenseDescription" HorizontalAlignment="Left" Height="23" Margin="199,34,0,0" TextWrapping="Wrap" Text="{Binding expenseDescription}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Expense Description" HorizontalAlignment="Left" Margin="199,11,0,0" VerticalAlignment="Top"/>
+        <Label Content="Expense Name" HorizontalAlignment="Left" Margin="42,11,0,0" VerticalAlignment="Top"/>
+        <Label Content="Contractor Name" HorizontalAlignment="Left" Margin="42,116,0,0" VerticalAlignment="Top"/>
+        <Label Content="Expense Cost" HorizontalAlignment="Left" Margin="42,62,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
