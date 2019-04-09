@@ -204,7 +204,7 @@ namespace JenningsRE
             expDataGrid.ItemsSource = _expenseAccess.GetExpenses(propId);
             ExpenseDataGrid = expDataGrid;
 
-            TenantGrid.ItemsSource = context.tenants.ToList();
+            TenantGrid.ItemsSource = _tenantAccess.GetTenants(propId);
             TenantDataGrid = TenantGrid;
         }
 
