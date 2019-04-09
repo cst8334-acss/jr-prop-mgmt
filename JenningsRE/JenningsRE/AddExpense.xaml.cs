@@ -23,14 +23,16 @@ namespace JenningsRE
         #region Members
         jenningsdbEntitiesConnection context;
         ExpenseAccess _expenseAccess;
+        int propertyId;
         #endregion
 
-        public AddExpense(jenningsdbEntitiesConnection context, ExpenseAccess expenseAccess)
+        public AddExpense(jenningsdbEntitiesConnection context, ExpenseAccess expenseAccess, int propertyId)
         {
 
             InitializeComponent();
             this.context = context;
             _expenseAccess = expenseAccess;
+            this.propertyId = propertyId;
 
 
             //Add Expense Button
@@ -78,7 +80,7 @@ namespace JenningsRE
             };
 
             //Add expense to DataGrid and DB
-            _expenseAccess.AddExpense(expense);
+            _expenseAccess.AddExpense(expense, propertyId);
 
             Close();
 

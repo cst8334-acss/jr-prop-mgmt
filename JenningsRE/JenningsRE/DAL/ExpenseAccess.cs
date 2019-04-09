@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace JenningsRE.DAL
 {
+    /// <summary>
+    /// Class hosting Data Access Methods for Expenses.
+    /// </summary>
     public class ExpenseAccess
     {
         jenningsdbEntitiesConnection context;
@@ -24,10 +27,11 @@ namespace JenningsRE.DAL
         /// <param name="exp_desc"></param>
         /// <param name="contractor_name"></param>
         /// <param name="exp_type"></param>
-        public void AddExpense(expense exp)
+        public void AddExpense(expense exp, int propertyId)
         {
             //TODO SET PROPERTY_EXPENSE_ID HERE - LE
 
+            exp.expense_property_id = propertyId;
             context.expenses.Add(exp);
             context.SaveChanges();
 

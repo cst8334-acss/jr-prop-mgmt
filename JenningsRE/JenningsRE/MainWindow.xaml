@@ -8,13 +8,16 @@
         Title="ACS Property Manager" Height="450" Width="800">
     <Window.Resources>
         <CollectionViewSource x:Key="expenseViewSource" d:DesignSource="{d:DesignInstance {x:Type local:expense}, CreateList=True}"/>
+        <Style TargetType="ListViewItem">
+            <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
+        </Style>
     </Window.Resources>
     <Grid Background="#FF847878">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Content="Create New Property" Name="addProperty"     HorizontalAlignment="Left" Margin="0,1,0,0" VerticalAlignment="Top" Width="140" Height="25" />
-        <ListView HorizontalAlignment="Left" Height="395" VerticalAlignment="Top" Width="140" Background="#FF817878" RenderTransformOrigin="0.5,0.5" Margin="0,24,0,0">
+        <Button Content="Create New Property" Name="addPropertyBtn" Click="AddPropertyBtn_Click" HorizontalAlignment="Left" Margin="0,1,0,0" VerticalAlignment="Top" Width="140" Height="25" />
+        <ListView x:Name="propList" HorizontalAlignment="Left" Height="395" VerticalAlignment="Top" Width="140" Background="#FF817878" RenderTransformOrigin="0.5,0.5" Margin="0,24,0,0">
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -25,7 +28,7 @@
             </ListView.RenderTransform>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Properties" DisplayMemberBinding="{Binding property_name}" Width="140"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -37,20 +40,26 @@
                         <ColumnDefinition Width="37*"/>
                         <ColumnDefinition Width="580*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Content="Save"  Name="saveProperty"  Grid.Column="2" Margin="100,300,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="70"/>
-                    <Button Content="Delete" Name="deleteProperty"   Grid.Column="2" Margin="350,300,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="70"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="223.333,30,0,0" TextWrapping="Wrap" Text="{Binding Address}" VerticalAlignment="Top" Width="120" x:Name="formAddress" Grid.Column="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="220,75,0,0" TextWrapping="Wrap" Text="{Binding city}" VerticalAlignment="Top" Width="120" x:Name="formCity" Grid.Column="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="220,120,0,0" TextWrapping="Wrap" Text="{Binding province}" VerticalAlignment="Top" Width="120" x:Name="formProvince" Grid.Column="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="220,165,0,0" TextWrapping="Wrap" Text="{Binding country}" VerticalAlignment="Top" Width="120" x:Name="formCountry" Grid.Column="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="220,210,0,0" TextWrapping="Wrap" Text="{Binding postal}" VerticalAlignment="Top" Width="120" x:Name="formPostal" Grid.Column="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="220,255,0,0" TextWrapping="Wrap" Text="{Binding numberOfUnits}" VerticalAlignment="Top" Width="120" x:Name="formunits" Grid.Column="2"/>
-                    <Label Content="Address" HorizontalAlignment="Left" Margin="105,30,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-                    <Label Content="City" HorizontalAlignment="Left" Margin="105,75,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-                    <Label Content="Province" HorizontalAlignment="Left" Margin="105,120,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-                    <Label Content="Country" HorizontalAlignment="Left" Margin="105,165,0,0" VerticalAlignment="Top" Height="30" Width="54" Grid.Column="2"/>
-                    <Label Content="Postal Code" HorizontalAlignment="Left" Margin="105,210,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-                    <Label Content="Number of Units" HorizontalAlignment="Left" Margin="105,255,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <Button Content="Save"  Name="savePropertyBtn" Click="SavePropertyBtn_Click" Grid.Column="2" Margin="100,300,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="70"/>
+                    <Button Content="Delete" Click="deletePropertyBtn_Click" Name="deletePropertyBtn"   Grid.Column="2" Margin="350,300,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="70"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="125,30,0,0" TextWrapping="Wrap" Text="{Binding address}" VerticalAlignment="Top" Width="120" x:Name="formAddress" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="125,75,0,0" TextWrapping="Wrap" Text="{Binding city}" VerticalAlignment="Top" Width="120" x:Name="formCity" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="125,120,0,0" TextWrapping="Wrap" Text="{Binding province}" VerticalAlignment="Top" Width="120" x:Name="formProvince" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="125,165,0,0" TextWrapping="Wrap" Text="{Binding country}" VerticalAlignment="Top" Width="120" x:Name="formCountry" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="125,210,0,0" TextWrapping="Wrap" Text="{Binding postal}" VerticalAlignment="Top" Width="120" x:Name="formPostal" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="125,255,0,0" TextWrapping="Wrap" Text="{Binding numberOfUnits}" VerticalAlignment="Top" Width="120" x:Name="formNumberOfUnits" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="400,30,0,0" TextWrapping="Wrap" Text="{Binding rentableArea}" VerticalAlignment="Top" Width="120" x:Name="formRentableArea" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="400,75,0,0" TextWrapping="Wrap" Text="{Binding availableSpace}" VerticalAlignment="Top" Width="120" x:Name="formAvailableSpace" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="400,120,0,0" TextWrapping="Wrap" Text="{Binding parkingSpots}" VerticalAlignment="Top" Width="120" x:Name="formParkingSpots" Grid.Column="2"/>
+                    <Label Content="Address" HorizontalAlignment="Left" Margin="25,30,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <Label Content="City" HorizontalAlignment="Left" Margin="25,75,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <Label Content="Province" HorizontalAlignment="Left" Margin="25,120,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <Label Content="Country" HorizontalAlignment="Left" Margin="25,165,0,0" VerticalAlignment="Top" Height="30" Width="54" Grid.Column="2"/>
+                    <Label Content="Postal Code" HorizontalAlignment="Left" Margin="25,210,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <Label Content="Number of Units" HorizontalAlignment="Left" Margin="25,255,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <Label Content="Rentable Area" HorizontalAlignment="Left" Margin="300,30,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <Label Content="Available Space" HorizontalAlignment="Left" Margin="300,75,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <Label Content="Parking Spots" HorizontalAlignment="Left" Margin="300,120,0,0" VerticalAlignment="Top" Grid.Column="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Tenant" x:Name="TenantTab">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JenningsRE.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,59 @@ namespace JenningsRE
     /// </summary>
     public partial class AddProperty : Window
     {
-        public AddProperty()
+        jenningsdbEntitiesConnection context;
+        PropertyAccess _propertyAccess;
+
+        public AddProperty(jenningsdbEntitiesConnection context, PropertyAccess propertyAccess)
         {
             InitializeComponent();
+            this.context = context;
+            _propertyAccess = propertyAccess;
+
+            Button applyBtn = new Button
+            {
+                Name = "applyBtn"
+            };
+            applyBtn.Click += ApplyBtn_Click;
+
+            Button cancelBtn = new Button
+            {
+                Name = "cancelBtn"
+            };
+            cancelBtn.Click += CancelBtn_Click;
+        }
+
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void ApplyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            property property = new property
+            {
+                property_name = formName.Text,
+                address = formAddress.Text,
+                city = formCity.Text,
+                province = formProvince.Text,
+                country = formCountry.Text,
+                postal_code = formPostal.Text,
+                number_of_units = int.Parse(formNumberOfUnits.Text),
+                available_space = int.Parse(formAvailableSpace.Text),
+                rentable_area = int.Parse(formRentableArea.Text),
+                parking_spots = formParkingSpots.Text
+            };
+
+            _propertyAccess.AddProperty(property);
+
+            Close();
+
+            MessageBoxButton mbBtn = MessageBoxButton.OK;
+            string header = "Add Property";
+            string message = $"Property: {property.property_name} has been created.";
+            MessageBoxImage icon = MessageBoxImage.Information;
+            MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
+
         }
     }
 }

@@ -7,27 +7,29 @@
         mc:Ignorable="d"
         Title="Add Property" Height="450" Width="800">
     <Grid>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="10,368,0,0" VerticalAlignment="Top" Width="75" Name="SaveButton" />
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="127,368,0,0" VerticalAlignment="Top" Width="75" Name="CancelBtn" />
+        <Button Content="Apply" Click="ApplyBtn_Click" HorizontalAlignment="Left" Margin="445,216,0,0" VerticalAlignment="Top" Width="75" Name="applyBtn" />
+        <Button Content="Cancel" Click="CancelBtn_Click" HorizontalAlignment="Left" Margin="445,255,0,0" VerticalAlignment="Top" Width="75" Name="cancelBtn" />
 
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,20,0,0" TextWrapping="Wrap" Text="{Binding PropertyName}" VerticalAlignment="Top" Width="120" Name="formPropertyName"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,65,0,0" TextWrapping="Wrap" Text="{Binding Address}" VerticalAlignment="Top" Width="120" Name="formAddress"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,110,0,0" TextWrapping="Wrap" Text="{Binding city}" VerticalAlignment="Top" Width="120" Name="formCity"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,155,0,0" TextWrapping="Wrap" Text="{Binding province}" VerticalAlignment="Top" Width="120" Name="formProvince"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,193,0,0" TextWrapping="Wrap" Text="{Binding country}" VerticalAlignment="Top" Width="120" Name="formCountry"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,238,0,0" TextWrapping="Wrap" Text="{Binding  postal}" VerticalAlignment="Top" Width="120" Name="formPostal"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="127,283,0,0" TextWrapping="Wrap" Text="{Binding numberOfUnits}" VerticalAlignment="Top" Width="120" Name="formunits"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="125,30,0,0" TextWrapping="Wrap" Text="{Binding propertyName}" VerticalAlignment="Top" Width="120" x:Name="formName" Grid.Column="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="125,75,0,0" TextWrapping="Wrap" Text="{Binding address}" VerticalAlignment="Top" Width="120" x:Name="formAddress" Grid.Column="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="125,120,0,0" TextWrapping="Wrap" Text="{Binding city}" VerticalAlignment="Top" Width="120" x:Name="formCity" Grid.Column="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="125,165,0,0" TextWrapping="Wrap" Text="{Binding province}" VerticalAlignment="Top" Width="120" x:Name="formProvince" Grid.Column="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="125,210,0,0" TextWrapping="Wrap" Text="{Binding country}" VerticalAlignment="Top" Width="120" x:Name="formCountry" Grid.Column="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="125,255,0,0" TextWrapping="Wrap" Text="{Binding postal}" VerticalAlignment="Top" Width="120" x:Name="formPostal" Grid.Column="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="125,300,0,0" TextWrapping="Wrap" Text="{Binding numberOfUnits}" VerticalAlignment="Top" Width="120" x:Name="formNumberOfUnits" Grid.Column="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="400,30,0,0" TextWrapping="Wrap" Text="{Binding rentableArea}" VerticalAlignment="Top" Width="120" x:Name="formRentableArea" Grid.Column="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="400,75,0,0" TextWrapping="Wrap" Text="{Binding availableSpace}" VerticalAlignment="Top" Width="120" x:Name="formAvailableSpace" Grid.Column="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="400,120,0,0" TextWrapping="Wrap" Text="{Binding parkingSpots}" VerticalAlignment="Top" Width="120" x:Name="formParkingSpots" Grid.Column="2"/>
 
-        <Label Content="Property Name" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
-        <Label Content="Address" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top"/>
-        <Label Content="City" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top"/>
-        <Label Content="Province" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top"/>
-        <Label Content="Country" HorizontalAlignment="Left" Margin="11,186,0,0" VerticalAlignment="Top" Height="30" Width="54"/>
-        <Label Content="Postal Code" HorizontalAlignment="Left" Margin="10,238,0,0" VerticalAlignment="Top"/>
-        <Label Content="Number of Units" HorizontalAlignment="Left" Margin="10,283,0,0" VerticalAlignment="Top"/>
-
-
-
-
+        <Label Content="Name" HorizontalAlignment="Left" Margin="25,30,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Address" HorizontalAlignment="Left" Margin="25,75,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="City" HorizontalAlignment="Left" Margin="25,120,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Province" HorizontalAlignment="Left" Margin="25,165,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Country" HorizontalAlignment="Left" Margin="25,210,0,0" VerticalAlignment="Top" Height="30" Width="54" Grid.Column="2"/>
+        <Label Content="Postal Code" HorizontalAlignment="Left" Margin="25,255,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Number of Units" HorizontalAlignment="Left" Margin="25,300,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Rentable Area" HorizontalAlignment="Left" Margin="300,30,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Available Space" HorizontalAlignment="Left" Margin="300,75,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Parking Spots" HorizontalAlignment="Left" Margin="300,120,0,0" VerticalAlignment="Top" Grid.Column="2"/>
     </Grid>
     </Window>
