@@ -38,8 +38,6 @@ namespace JenningsRE
         public Nullable<double> total_acquisition_cost { get; set; }
         public Nullable<double> mortgage_ltv_cost { get; set; }
         public Nullable<double> mortgage_ltv_percentage { get; set; }
-        public Nullable<double> twenty_year_interest_rate { get; set; }
-        public Nullable<double> twenty_year_interest_rate_percentage { get; set; }
         public Nullable<double> twenty_five_year_interest_rate { get; set; }
         public Nullable<double> twenty_five_year_interest_rate_percentage { get; set; }
         public Nullable<double> annual_debt_service_twenty_years { get; set; }

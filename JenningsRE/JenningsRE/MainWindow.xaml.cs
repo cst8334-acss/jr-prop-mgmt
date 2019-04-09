@@ -91,6 +91,7 @@ namespace JenningsRE
             #endregion
         }
 
+        #region PropertyTabHandlers
         /// <summary>
         /// Validating inputs
         /// </summary>
@@ -169,7 +170,7 @@ namespace JenningsRE
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void deletePropertyBtn_Click(object sender, RoutedEventArgs e)
+        private void DeletePropertyBtn_Click(object sender, RoutedEventArgs e)
         {
 
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this property?",
@@ -186,69 +187,6 @@ namespace JenningsRE
             }
         }
 
-        #region ExpenseTabHandlers
-        /// <summary>
-        /// Display Pop-up Add Expense Window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AddExpenseBtn_Click(object sender, RoutedEventArgs e)
-        {
-            AddExpense addWindow = new AddExpense(context,_expenseAccess, property_id);
-            addWindow.ShowDialog();
-            expDataGrid.Items.Refresh();
-        }
-
-        /// <summary>
-        /// Update Selected Row from DataGrid
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdateExpenseBtn_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateExpense upWindow = new UpdateExpense();
-            upWindow.ShowDialog();
-            expDataGrid.Items.Refresh();
-        }
-
-        /// <summary>
-        /// Delete Selected Row from DataGrid and DB
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DeleteExpenseBtn_Click(object sender, RoutedEventArgs e)
-        {
-            expense exp = ExpenseDataGrid.SelectedItem as expense;
-            _expenseAccess.RemoveExpense(exp);
-            expDataGrid.Items.Refresh();
-        }
-        /// <summary>
-        /// Load the DataGrids for each tab
-        /// </summary>
-        private void LoadGrid(int propId)
-        {
-            expDataGrid.ItemsSource = _expenseAccess.GetExpenses(propId);
-            ExpenseDataGrid = expDataGrid;
-
-            TenantGrid.ItemsSource = _tenantAccess.GetTenants(propId);
-            TenantDataGrid = TenantGrid;
-        }
-
-        #endregion
-        
-        /// <summary>
-        /// Switch view to Analysis
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void switchScreen(object sender, RoutedEventArgs e)
-        {
-            AnalysisWindow Analysis = new AnalysisWindow();
-            Analysis.Show();
-            Close();
-        }
-
-        #region PropertyTabHandlers
         /// <summary>
         /// Scope to Selected Property,
         /// Populates data for manipulation in tenant
@@ -287,7 +225,7 @@ namespace JenningsRE
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             LoadPropertyList();
-            
+
         }
 
         /// <summary>
@@ -316,6 +254,128 @@ namespace JenningsRE
 
         #endregion
 
+        #region ExpenseTabHandlers
+        /// <summary>
+        /// Display Pop-up Add Expense Window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddExpenseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddExpense addWindow = new AddExpense(context,_expenseAccess, property_id);
+            addWindow.ShowDialog();
+            expDataGrid.Items.Refresh();
+        }
+
+        /// <summary>
+        /// Update Selected Row from DataGrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateExpenseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateExpense upWindow = new UpdateExpense();
+            upWindow.ShowDialog();
+            expDataGrid.Items.Refresh();
+        }
+
+        /// <summary>
+        /// Delete Selected Row from DataGrid and DB
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteExpenseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            expense exp = ExpenseDataGrid.SelectedItem as expense;
+            _expenseAccess.RemoveExpense(exp);
+            expDataGrid.Items.Refresh();
+        }
+
+        private void FilterExpenseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FilterExpenseGrid(property_id);
+        }
+        /// <summary>
+        /// Load the DataGrids for each tab
+        /// </summary>
+        private void LoadGrid(int propId)
+        {
+            expDataGrid.ItemsSource = _expenseAccess.GetExpenses(propId);
+            ExpenseDataGrid = expDataGrid;
+
+            TenantGrid.ItemsSource = _tenantAccess.GetTenants(propId);
+            TenantDataGrid = TenantGrid;
+        }
+
+        /// <summary>
+        /// Reload Expense DataGrid without filters.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClearExpenseFilterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ExpenseDataGrid.ItemsSource = _expenseAccess.GetExpenses(property_id);
+        }
+
+        /// <summary>
+        /// Filters the items found within the expense datagrid
+        /// </summary>
+        private void FilterExpenseGrid(int propId)
+        {
+
+            var filteredExpenses = new List<expense>();
+
+            var filterType = formExpenseFilterComboBox.SelectedIndex;
+            
+
+            switch (filterType)
+            {
+                case 1:
+                    {
+                        var fe = (from e in context.expenses
+                                  where e.expense_name.Contains(formExpenseFilter.Text)
+                                  && e.expense_property_id == propId
+                                  select e).ToList();
+
+                        filteredExpenses.AddRange(fe);
+
+                        break;
+                    }
+                case 2:
+                    {
+                        var fe = (from e in context.expenses
+                                  where e.contractor_name.Contains(formExpenseFilter.Text)
+                                  && e.expense_property_id == propId
+                                  select e).ToList();
+
+                        filteredExpenses.AddRange(fe);
+
+                        break;
+                    }
+                case 3:
+                    {
+                        var fe = (from e in context.expenses
+                                  where e.expense_id.ToString() == formExpenseFilter.Text
+                                  && e.expense_property_id == propId
+                                  select e).ToList();
+
+                        filteredExpenses.AddRange(fe);
+
+                        break;
+                    }
+                default:
+                    break;
+
+            };
+
+            ExpenseDataGrid.ItemsSource = filteredExpenses;
+            
+
+        }
+
+        #endregion
+        
+        #region TenantTabHandlers
         private void AddTenantBtn_Click(object sender, RoutedEventArgs e)
         {
             AddTenant Tenant = new AddTenant(context, _tenantAccess, property_id);
@@ -346,6 +406,72 @@ namespace JenningsRE
             UpdateTenant tenant = new UpdateTenant();
             tenant.ShowDialog();
             TenantGrid.Items.Refresh();
+        }
+
+        /// <summary>
+        /// Filter Tenant Grid by Input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FilterTenantBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var filteredTenants = new List<tenant>();
+
+            var filterType = formTenantFilterComboBox.SelectedIndex;
+
+            switch (filterType)
+            {
+                case 0:
+                    {
+                        var ft = (from t in context.tenants
+                                  where t.tenant_name.Contains(formTenantFilter.Text)
+                                  select t).ToList();
+
+                        filteredTenants.AddRange(ft);
+
+                        break;
+                    }
+                case 1:
+                    {
+                        var unitNum = int.Parse(formTenantFilter.Text);
+
+                        var ft = (from t in context.tenants
+                                  where t.unit_number == unitNum
+                                  select t).ToList();
+
+                        filteredTenants.AddRange(ft);
+
+                        break;
+                    }
+                default:
+                    break;
+            }
+
+            TenantDataGrid.ItemsSource = filteredTenants;
+        }
+
+        /// <summary>
+        /// Clear Filters from Tenant Grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClearTenantFilterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TenantDataGrid.ItemsSource = _tenantAccess.GetTenants(property_id);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Switch view to Analysis
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SwitchScreen(object sender, RoutedEventArgs e)
+        {
+            AnalysisWindow Analysis = new AnalysisWindow();
+            Analysis.Show();
+            Close();
         }
     }
 }

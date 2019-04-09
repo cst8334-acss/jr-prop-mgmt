@@ -180,8 +180,6 @@
           <Property Name="total_acquisition_cost" Type="Double" />
           <Property Name="mortgage_ltv_cost" Type="Double" />
           <Property Name="mortgage_ltv_percentage" Type="Double" />
-          <Property Name="twenty_year_interest_rate" Type="Double" />
-          <Property Name="twenty_year_interest_rate_percentage" Type="Double" />
           <Property Name="twenty_five_year_interest_rate" Type="Double" />
           <Property Name="twenty_five_year_interest_rate_percentage" Type="Double" />
           <Property Name="annual_debt_service_twenty_years" Type="Double" />
@@ -340,8 +338,6 @@
                 <ScalarProperty Name="total_acquisition_cost" ColumnName="total_acquisition_cost" />
                 <ScalarProperty Name="mortgage_ltv_cost" ColumnName="mortgage_ltv_cost" />
                 <ScalarProperty Name="mortgage_ltv_percentage" ColumnName="mortgage_ltv_percentage" />
-                <ScalarProperty Name="twenty_year_interest_rate" ColumnName="twenty_year_interest_rate" />
-                <ScalarProperty Name="twenty_year_interest_rate_percentage" ColumnName="twenty_year_interest_rate_percentage" />
                 <ScalarProperty Name="twenty_five_year_interest_rate" ColumnName="twenty_five_year_interest_rate" />
                 <ScalarProperty Name="twenty_five_year_interest_rate_percentage" ColumnName="twenty_five_year_interest_rate_percentage" />
                 <ScalarProperty Name="annual_debt_service_twenty_years" ColumnName="annual_debt_service_twenty_years" />

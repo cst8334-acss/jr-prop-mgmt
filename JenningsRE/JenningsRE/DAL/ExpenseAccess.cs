@@ -29,7 +29,6 @@ namespace JenningsRE.DAL
         /// <param name="exp_type"></param>
         public void AddExpense(expense exp, int propertyId)
         {
-            //TODO SET PROPERTY_EXPENSE_ID HERE - LE
 
             exp.expense_property_id = propertyId;
             context.expenses.Add(exp);
