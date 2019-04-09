@@ -64,38 +64,24 @@
             </TabItem>
             <TabItem Header="Tenant" x:Name="TenantTab">
                 <Grid Background="#FFE5E5E5" Margin="0,0,-0.2,0.2" HorizontalAlignment="Left" Width="649">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="57*"/>
-                    </Grid.ColumnDefinitions>
-                    
-                    <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="32,20,0,0" VerticalAlignment="Top" Width="120"/>
-
-                    <Button Content="New" Name="AddTenantBtn" HorizontalAlignment="Left" Margin="203.4,22,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.909,-2.042"  Grid.Column="1" Click="AddTenantBtn_Click"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="150,327,0,0" VerticalAlignment="Top" Width="75" Name="DeleteTenantBtn"  Grid.Column="1"/>
-                    <Button Content="Save" HorizontalAlignment="Left" Margin="40,327,0,0" VerticalAlignment="Top" Width="75" x:Name="SaveBtn" Grid.Column="1" />
-                  
-                    <Label Content="Tenant Name" HorizontalAlignment="Left" Margin="32,65,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label Content="Unit #" HorizontalAlignment="Left" Margin="32,115,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label Content="Square feet" HorizontalAlignment="Left" Margin="32,165,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label Content="Rent per SF" HorizontalAlignment="Left" Margin="32,215,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label Content="Monthly Rent" HorizontalAlignment="Left" Margin="32,265,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label Content="Yearly Rent" HorizontalAlignment="Left" Margin="350,65,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label Content="Lease Start" HorizontalAlignment="Left" Margin="350,115,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label Content="Lease End" HorizontalAlignment="Left" Margin="350,165,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <Label Content="Months Left" HorizontalAlignment="Left" Margin="350,215,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="163,65,0,0" TextWrapping="Wrap" Text="{Binding TenantName}" VerticalAlignment="Top" Width="120" x:Name="formTenantName" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="163,115,0,0" TextWrapping="Wrap" Text="{Binding UnitNumber}" VerticalAlignment="Top" Width="120" x:Name="formUnitForm" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="163,165,0,0" TextWrapping="Wrap" Text="{Binding SquareFeet}" VerticalAlignment="Top" Width="120" x:Name="formSquareFeet" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="163,215,0,0" TextWrapping="Wrap" Text="{Binding RentPerSF}" VerticalAlignment="Top" Width="120" x:Name="formRent" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="163,265,0,0" TextWrapping="Wrap" Text="{Binding MonthlyRent}" VerticalAlignment="Top" Width="120" x:Name="formMonthly" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="450,65,0,0" TextWrapping="Wrap" Text="{Binding YearlyRent}" VerticalAlignment="Top" Width="120" x:Name="formYearly" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="450,215,0,0" TextWrapping="Wrap" Text="{Binding MonthLeft}" VerticalAlignment="Top" Width="120" x:Name="formMonthsLeft" Grid.Column="1"/>
-
-                    <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="450,115,0,0" DisplayDate="{Binding LeaseStart}"/>
-                    <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="450,165,0,0" DisplayDate="{Binding LeaseEnd}"/>
-
+                    <DataGrid x:Name="TenantGrid" HorizontalAlignment="Left" Height="284" VerticalAlignment="Top" Width="620" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="14,13,0,0" RowDetailsVisibilityMode="VisibleWhenSelected">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="TenantIdColumn" Binding="{Binding tenant_id}" Header="Id" Width="SizeToHeader" Visibility="Hidden"/>
+                            <DataGridTextColumn x:Name="TenantNameColumn" Binding="{Binding tenant_name}" Header="Name" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="TenantUnitColumn" Binding="{Binding unit_number}" Header="Unit#" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="TenantSizeColumn" Binding="{Binding unit_size_sqft}" Header="Size(sqft)" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="TenantRentPerSf" Binding="{Binding rent_per_sf}" Header="Rent(sqft)" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="TenantMonthlyRentColumn" Binding="{Binding monthly_rent}" Header="Monthly rent" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="TenantAnnualRentColumn" Binding="{Binding annual_rent}" Header="Annual rent" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="TenantLeaseStartColumn" Binding="{Binding lease_start}" Header="Lease Start date" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="TenantLeaseEndColumn" Binding="{Binding lease_end}" Header="Lease End date" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="TenantMonthsLeftColumn" Binding="{Binding months_left}" Header="Months left" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="TenantPropertyIdColumn" Binding="{Binding months_left}" Header="Property Id" Width="SizeToHeader" Visibility="Hidden"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Add New tenant" Name="AddTenantBtn" HorizontalAlignment="Left" Margin="26,328,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.909,-2.042" Click="AddTenantBtn_Click" Height="22"/>
+                    <Button Content="Edit Tenant" x:Name="UpdateTenantBtn" HorizontalAlignment="Left" Margin="152,328,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.909,-2.042" Height="22" Click="UpdateTenantBtn_Click"/>
+                    <Button Content="Delete Tenant" x:Name="DeleteTenantBtn" HorizontalAlignment="Left" Margin="266,328,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.909,-2.042" Height="22" Click="DeleteTenantBtn_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Expenses" x:Name="ExpenseTab">

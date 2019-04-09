@@ -15,26 +15,27 @@ using System.Windows.Shapes;
 using JenningsRE.DAL;
 
 namespace JenningsRE
-{
+{ 
     /// <summary>
-    /// Interaction logic for AddTenant.xaml
+    /// @author Vijay Abhichandani
+    /// This class will add the tenant into the database using mouse click events from the UI
     /// </summary>
     public partial class AddTenant : Window
     {
-        private string tenant_name;
-        private int unit_number;
-        private double unit_size_sqft;
-        private double rent_per_sf;
-        private double monthly_rent;
-        private double annual_rent;
-        private DateTime lease_start;
-        private DateTime lease_end;
-        private int months_left;
 
-        public AddTenant()
+        #region Members
+        jenningsdbEntitiesConnection context;
+        TenantAccess _tenantAccess;
+        int propertyId;
+        #endregion
+
+        public AddTenant(jenningsdbEntitiesConnection context, TenantAccess  tenantAccess, int propertyId)
         {
-            Clear();
             InitializeComponent();
+            this.context = context;
+            this.propertyId = propertyId;
+            _tenantAccess = tenantAccess;
+
 
             //Cancel Transaction Button
             Button cancelBtn = new Button()
@@ -85,26 +86,31 @@ namespace JenningsRE
         /// <param name="e"></param>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            tenant_name = formTenantName.Text;
-            unit_number = int.Parse(formUnitNumber.Text);
-            unit_size_sqft = double.Parse(formSquareFeet.Text);
-            rent_per_sf = annual_rent = double.Parse(formRent.Text);
-            monthly_rent = (double.Parse(formRent.Text)/12);
-            lease_start = DateTime.Parse(formStart.Text);
-            lease_end = DateTime.Parse(formEnd.Text);
-            months_left = int.Parse(formMonthsLeft.Text);
+            var annualRent = (double.Parse(formRent.Text)) * (double.Parse(formSquareFeet.Text));
+            //Map Text box fields to new tenant object
+            tenant tenant = new tenant
+            {
+                tenant_name = formTenantName.Text,
+                unit_number = int.Parse(formUnitNumber.Text),
+                unit_size_sqft = double.Parse(formSquareFeet.Text),
+                rent_per_sf = double.Parse(formRent.Text),
+                annual_rent = annualRent,
+                monthly_rent = annualRent/12,
+                lease_start = DateTime.Parse(formStart.Text),
+                lease_end = DateTime.Parse(formEnd.Text),
+                months_left = int.Parse(formMonthsLeft.Text),
+                tenant_property_id = propertyId
+            };
 
-            TenantAccess tenant = new TenantAccess();
-            tenant.AddNewTenant(1,tenant_name,unit_number,unit_size_sqft,rent_per_sf,monthly_rent,annual_rent,lease_start,lease_end,months_left);
-            MessageBox.Show("Tenant added");
+            _tenantAccess.AddNewTenant(tenant, propertyId);
+            Close();
+
+            MessageBoxButton mbBtn = MessageBoxButton.OK;
+            string header = "Add Expense";
+            string message = $"Tenant: {tenant.tenant_name} has been added.";
+            MessageBoxImage icon = MessageBoxImage.Information;
+            MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
             Clear();
-
-            //tenant.GetAllTenants(1);
-
-            //tenant.UpdateTenant(1);
-
-            //tenant.DeleteTenant(1);
-            //MessageBox.Show("Tenant Deleted");
         }
     }
 }

@@ -35,7 +35,7 @@ namespace JenningsRE.DAL
             context.expenses.Add(exp);
             context.SaveChanges();
 
-            MainWindow.expenseDataGrid.ItemsSource = context.expenses.ToList();
+           MainWindow.ExpenseDataGrid.ItemsSource = context.expenses.ToList();
 
         }
 
@@ -66,7 +66,7 @@ namespace JenningsRE.DAL
             context.expenses.Remove(delExp);
             context.SaveChanges();
 
-            MainWindow.expenseDataGrid.ItemsSource = context.expenses.ToList();
+           MainWindow.ExpenseDataGrid.ItemsSource = context.expenses.ToList();
         }
 
     }
