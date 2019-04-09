@@ -13,7 +13,7 @@ namespace JenningsRE.Properties
 
 
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
     {
 
@@ -24,6 +24,17 @@ namespace JenningsRE.Properties
             get
             {
                 return defaultInstance;
+            }
+        }
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("NWK/CHHhzWbKLIrYeaL/mw==")]
+        public string Salt
+        {
+            get
+            {
+                return ((string)(this["Salt"]));
             }
         }
     }

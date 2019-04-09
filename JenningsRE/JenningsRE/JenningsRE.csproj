@@ -159,8 +159,12 @@
     <Compile Include="DAL\PropertyAccess.cs" />
     <Compile Include="DAL\TenantAccess.cs" />
     <Compile Include="DAL\TwentyYearAccess.cs" />
+    <Compile Include="DAL\UserAccess.cs" />
     <Compile Include="expense.cs">
       <DependentUpon>PropertyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="property.cs">
       <DependentUpon>PropertyModel.tt</DependentUpon>
@@ -180,6 +184,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PropertyModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="RegisterWindow.xaml.cs">
+      <DependentUpon>RegisterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ResultTransfer\ObjectResult.cs" />
     <Compile Include="tenant.cs">
       <DependentUpon>PropertyModel.tt</DependentUpon>
     </Compile>
@@ -195,6 +203,9 @@
     <Compile Include="user.cs">
       <DependentUpon>PropertyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserManagement.xaml.cs">
+      <DependentUpon>UserManagement.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddExpense.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -208,8 +219,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LoginWindow.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -225,9 +236,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -240,6 +248,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="RegisterWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UpdateExpense.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -247,6 +259,10 @@
     <Page Include="UpdateTenant.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
