@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:JenningsRE"
         mc:Ignorable="d"
         Title="Add Expense" Height="265" Width="400">
-    <Grid>
+    <Grid Name="AddExpensesGrid">
         <Button Content="Apply"  Click="ApplyBtn_Click" HorizontalAlignment="Left" Margin="199,185,0,0" VerticalAlignment="Top" Width="75" Name="ApplyBtn" RenderTransformOrigin="1.271,0.502"/>
         <Button Content="Cancel"  HorizontalAlignment="Left" Margin="295,185,0,0" VerticalAlignment="Top" Width="75" Name="CancelBtn" Click="CancelBtn_Click"/>
         <RadioButton GroupName="expenseType" Name="expTypeOp" Content="Operational"  IsChecked="True" HorizontalAlignment="Left" Margin="199,95,0,0" VerticalAlignment="Top"/>

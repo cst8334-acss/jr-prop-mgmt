@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:JenningsRE"
         mc:Ignorable="d"
         Title="UpdateTenant" Height="500" Width="388">
-    <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
+    <Grid Name="UpdateExpenseGrid" Background="#FFE5E5E5" Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="57*"/>

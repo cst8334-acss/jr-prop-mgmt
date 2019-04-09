@@ -41,6 +41,28 @@ namespace JenningsRE
             SetFields(expense);
         }
 
+        /// <summary>
+        /// Validating inputs
+        /// </summary>
+        /// <returns></returns>
+        private Boolean Validate()
+        {
+            foreach (Control control in UpdateExpenseGrid.Children)
+            {
+                string controlType = control.GetType().ToString();
+                if (controlType == "System.Windows.Controls.TextBox")
+                {
+                    TextBox txtBox = (TextBox)control;
+                    if (string.IsNullOrEmpty(txtBox.Text))
+                    {
+                        MessageBox.Show(txtBox.Name + " Can not be empty");
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         private expense GetSelectedExpense()
         {
           return MainWindow.ExpenseDataGrid.SelectedItem as expense;
@@ -84,26 +106,32 @@ namespace JenningsRE
         /// <param name="e"></param>
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            expense editExp = (from ex in context.expenses
-                               where ex.expense_id == this.expense.expense_id
-                               select ex).Single();
+            var validator = Validate();
+            if (validator)
+            {
+                expense editExp = (from ex in context.expenses
+                    where ex.expense_id == this.expense.expense_id
+                    select ex).Single();
 
-            editExp.expense_name = formExpenseName.Text;
-            editExp.expense_cost = Double.Parse(formExpenseCost.Text);
-            editExp.contractor_name = formContractorName.Text;
-            editExp.expense_desc = formExpenseDescription.Text;
-            editExp.expense_type = expTypeOp.IsChecked == true ? expTypeOp.Content.ToString() : expTypeAdm.Content.ToString();
+                editExp.expense_name = formExpenseName.Text;
+                editExp.expense_cost = Double.Parse(formExpenseCost.Text);
+                editExp.contractor_name = formContractorName.Text;
+                editExp.expense_desc = formExpenseDescription.Text;
+                editExp.expense_type = expTypeOp.IsChecked == true
+                    ? expTypeOp.Content.ToString()
+                    : expTypeAdm.Content.ToString();
 
-            context.SaveChanges();
-            MainWindow.ExpenseDataGrid.ItemsSource = context.expenses.ToList();
+                context.SaveChanges();
+                MainWindow.ExpenseDataGrid.ItemsSource = context.expenses.ToList();
 
-            MessageBoxButton mbBtn = MessageBoxButton.OK;
-            string header = "Update Expense";
-            string message = $"Expense id:{editExp.expense_id} has been altered.";
-            MessageBoxImage icon = MessageBoxImage.Information;
-            MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
+                MessageBoxButton mbBtn = MessageBoxButton.OK;
+                string header = "Update Expense";
+                string message = $"Expense id:{editExp.expense_id} has been altered.";
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
 
-            Close();
+                Close();
+            }
         }
     }
 }

@@ -92,6 +92,28 @@ namespace JenningsRE
         }
 
         /// <summary>
+        /// Validating inputs
+        /// </summary>
+        /// <returns></returns>
+        private Boolean Validate()
+        {
+            foreach (Control control in UpdatePropertyGrid.Children)
+            {
+                string controlType = control.GetType().ToString();
+                if (controlType == "System.Windows.Controls.TextBox")
+                {
+                    TextBox txtBox = (TextBox)control;
+                    if (string.IsNullOrEmpty(txtBox.Text))
+                    {
+                        MessageBox.Show(txtBox.Name + " Can not be empty");
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
         /// Display Pop-up Add Property Window
         /// </summary>
         /// <param name="sender"></param>
@@ -109,32 +131,36 @@ namespace JenningsRE
         /// <param name="e"></param>
         private void SavePropertyBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to update this property?", 
-                                      "Update Property", MessageBoxButton.YesNo);
-
-            if (result == MessageBoxResult.Yes)
+            var validator = Validate();
+            if (validator)
             {
-                property property = (from p in context.properties
-                                     where p.property_id == property_id
-                                     select p).Single();
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to update this property?",
+                    "Update Property", MessageBoxButton.YesNo);
 
-                property.address = formAddress.Text;
-                property.city = formCity.Text;
-                property.province = formProvince.Text;
-                property.country = formCountry.Text;
-                property.postal_code = formPostal.Text;
-                property.number_of_units = int.Parse(formNumberOfUnits.Text);
-                property.rentable_area = int.Parse(formRentableArea.Text);
-                property.available_space = int.Parse(formAvailableSpace.Text);
+                if (result == MessageBoxResult.Yes)
+                {
+                    property property = (from p in context.properties
+                        where p.property_id == property_id
+                        select p).Single();
 
-                context.SaveChanges();
+                    property.address = formAddress.Text;
+                    property.city = formCity.Text;
+                    property.province = formProvince.Text;
+                    property.country = formCountry.Text;
+                    property.postal_code = formPostal.Text;
+                    property.number_of_units = int.Parse(formNumberOfUnits.Text);
+                    property.rentable_area = int.Parse(formRentableArea.Text);
+                    property.available_space = int.Parse(formAvailableSpace.Text);
 
-                LoadPropertyList();
+                    context.SaveChanges();
 
-            }
-            else if (result == MessageBoxResult.No)
-            {
-                Hide();
+                    LoadPropertyList();
+
+                }
+                else if (result == MessageBoxResult.No)
+                {
+                    Hide();
+                }
             }
         }
 

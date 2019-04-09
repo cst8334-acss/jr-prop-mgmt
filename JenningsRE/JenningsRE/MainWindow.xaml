@@ -34,7 +34,7 @@
         </ListView>
         <TabControl Name="TabController" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}" HorizontalAlignment="Left" Height="410" Margin="140,10,-2,-1" VerticalAlignment="Top" Width="654">
             <TabItem Header="Property" x:Name="PropertyTab">
-                <Grid Background="#FFE5E5E5">
+                <Grid Name="UpdatePropertyGrid" Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="31*"/>
                         <ColumnDefinition Width="37*"/>

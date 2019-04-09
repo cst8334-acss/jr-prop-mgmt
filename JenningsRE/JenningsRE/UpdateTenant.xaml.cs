@@ -32,6 +32,28 @@ namespace JenningsRE
         }
 
         /// <summary>
+        /// Validating inputs
+        /// </summary>
+        /// <returns></returns>
+        private Boolean Validate()
+        {
+            foreach (Control control in UpdateExpenseGrid.Children)
+            {
+                string controlType = control.GetType().ToString();
+                if (controlType == "System.Windows.Controls.TextBox")
+                {
+                    TextBox txtBox = (TextBox)control;
+                    if (string.IsNullOrEmpty(txtBox.Text))
+                    {
+                        MessageBox.Show(txtBox.Name + " Can not be empty");
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
         /// gets the selected tenant details 
         /// </summary>
         /// <returns></returns>
@@ -72,30 +94,34 @@ namespace JenningsRE
         /// <param name="e"></param>
         private void UpdateTenantBtn_Click(object sender, RoutedEventArgs e)
         {
-            tenant editTenant = (from t in context.tenants
-                                 where t.tenant_id == tenant.tenant_id
-                                 select t).Single();
+            var validator = Validate();
+            if (validator)
+            {
+                tenant editTenant = (from t in context.tenants
+                    where t.tenant_id == tenant.tenant_id
+                    select t).Single();
 
-            editTenant.tenant_name = formTenantName.Text;
-            editTenant.unit_number = int.Parse(formUnitNumber.Text);
-            editTenant.unit_size_sqft = double.Parse(formSquareFeet.Text);
-            editTenant.rent_per_sf = double.Parse(formRent.Text);
-            editTenant.annual_rent = tenant.rent_per_sf;
-            editTenant.monthly_rent = tenant.annual_rent / 12;
-            editTenant.lease_start = DateTime.Parse(formStart.Text);
-            editTenant.lease_end = DateTime.Parse(formEnd.Text);
-            editTenant.months_left = int.Parse(formMonthsLeft.Text);
+                editTenant.tenant_name = formTenantName.Text;
+                editTenant.unit_number = int.Parse(formUnitNumber.Text);
+                editTenant.unit_size_sqft = double.Parse(formSquareFeet.Text);
+                editTenant.rent_per_sf = double.Parse(formRent.Text);
+                editTenant.annual_rent = tenant.rent_per_sf;
+                editTenant.monthly_rent = tenant.annual_rent / 12;
+                editTenant.lease_start = DateTime.Parse(formStart.Text);
+                editTenant.lease_end = DateTime.Parse(formEnd.Text);
+                editTenant.months_left = int.Parse(formMonthsLeft.Text);
 
-            context.SaveChanges();
+                context.SaveChanges();
 
-            MainWindow.TenantDataGrid.ItemsSource = context.tenants.ToList();
+                MainWindow.TenantDataGrid.ItemsSource = context.tenants.ToList();
 
-            MessageBoxButton mbBtn = MessageBoxButton.OK;
-            string header = "Update Tenant";
-            string message = $"Tenant name:{editTenant.tenant_name} has been altered.";
-            MessageBoxImage icon = MessageBoxImage.Information;
-            MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
-            Close();
+                MessageBoxButton mbBtn = MessageBoxButton.OK;
+                string header = "Update Tenant";
+                string message = $"Tenant name:{editTenant.tenant_name} has been altered.";
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
+                Close();
+            }
         }
     }
 }
