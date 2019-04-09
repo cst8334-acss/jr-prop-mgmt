@@ -28,7 +28,7 @@ namespace JenningsRE.DAL
         /// <param name="tenant"></param>
         public void AddNewTenant(tenant tenant, int propertyId)
        {
-            tenant.tenant_property_id = propertyId;
+           tenant.tenant_property_id = propertyId;
            contex.tenants.Add(tenant);
            contex.SaveChanges();
            MainWindow.TenantDataGrid.ItemsSource = contex.tenants.ToList();

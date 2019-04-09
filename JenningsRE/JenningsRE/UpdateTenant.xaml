@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JenningsRE"
         mc:Ignorable="d"
-        Title="UpdateTenant" Height="500" Width="388">
+        Title="UpdateTenant" Height="450" Width="388">
     <Grid Name="UpdateExpenseGrid" Background="#FFE5E5E5" Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="57*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="160,400,0,0" VerticalAlignment="Top" Width="75" Name="CancelTenantBtn"  Grid.Column="1" Click="CancelTenantBtn_Click"/>
-        <Button Content="Update" HorizontalAlignment="Left" Margin="40,400,0,0" VerticalAlignment="Top" Width="75" Name="UpdateTenantBtn" Grid.Column="1" Click="UpdateTenantBtn_Click" />
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="160,350,0,0" VerticalAlignment="Top" Width="75" Name="CancelTenantBtn"  Grid.Column="1" Click="CancelTenantBtn_Click"/>
+        <Button Content="Update" HorizontalAlignment="Left" Margin="40,350,0,0" VerticalAlignment="Top" Width="75" Name="UpdateTenantBtn" Grid.Column="1" Click="UpdateTenantBtn_Click" />
 
         <Label Content="Tenant Name" HorizontalAlignment="Left" Margin="30,35,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         <Label Content="Unit #" HorizontalAlignment="Left" Margin="30,85,0,0" VerticalAlignment="Top" Grid.Column="1"/>
@@ -20,13 +20,11 @@
         <Label Content="Rent per SF" HorizontalAlignment="Left" Margin="30,185,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         <Label Content="Lease Start" HorizontalAlignment="Left" Margin="30,235,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         <Label Content="Lease End" HorizontalAlignment="Left" Margin="30,285,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <Label Content="Months Left" HorizontalAlignment="Left" Margin="30,335,0,0" VerticalAlignment="Top" Grid.Column="1"/>
 
         <TextBox HorizontalAlignment="Left" Height="23" Margin="160,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" x:Name="formTenantName" Grid.Column="1"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="160,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" x:Name="formUnitNumber" Grid.Column="1"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="160,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" x:Name="formSquareFeet" Grid.Column="1"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="160,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" x:Name="formRent" Grid.Column="1"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="160,335,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" x:Name="formMonthsLeft" Grid.Column="1"/>
 
         <DatePicker Name="formStart" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="160,235,0,0" DisplayDate="{Binding LeaseStart}"/>
         <DatePicker Name="formEnd" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="160,285,0,0" DisplayDate="{Binding LeaseEnd}"/>

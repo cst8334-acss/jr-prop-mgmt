@@ -37,7 +37,6 @@ namespace JenningsRE
             this.propertyId = propertyId;
             _tenantAccess = tenantAccess;
 
-
             //Cancel Transaction Button
             Button cancelBtn = new Button()
             {
@@ -52,7 +51,6 @@ namespace JenningsRE
             };
             saveBtn.Click += SaveBtn_Click;
         }
-
 
         /// <summary>
         /// Clears values from controls
@@ -108,34 +106,50 @@ namespace JenningsRE
         /// <param name="e"></param>
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
+            
             var validator = Validate();
             if (validator)
             {
+                property property = (from p in context.properties
+                                      where p.property_id == propertyId
+                                      select p).FirstOrDefault();
+
                 var annualRent = (double.Parse(formRent.Text)) * (double.Parse(formSquareFeet.Text));
-                //Map Text box fields to new tenant object
-                tenant tenant = new tenant
+
+                var unitSize = int.Parse(formSquareFeet.Text);
+                var availableSpace = property.available_space;
+                var leaseStart = DateTime.Parse(formStart.Text);
+                var leaseEnd = DateTime.Parse(formEnd.Text);
+                var monthsLeft = (leaseEnd.Month + leaseEnd.Year * 12) - (leaseStart.Month + leaseStart.Year * 12);
+
+                if (unitSize <= availableSpace)
                 {
-                    tenant_name = formTenantName.Text,
-                    unit_number = int.Parse(formUnitNumber.Text),
-                    unit_size_sqft = double.Parse(formSquareFeet.Text),
-                    rent_per_sf = double.Parse(formRent.Text),
-                    annual_rent = annualRent,
-                    monthly_rent = annualRent / 12,
-                    lease_start = DateTime.Parse(formStart.Text),
-                    lease_end = DateTime.Parse(formEnd.Text),
-                    months_left = int.Parse(formMonthsLeft.Text),
-                    tenant_property_id = propertyId
-                };
+                    //Map Text box fields to new tenant object
+                    tenant tenant = new tenant
+                    {
+                        tenant_name = formTenantName.Text,
+                        unit_number = int.Parse(formUnitNumber.Text),
+                        unit_size_sqft = double.Parse(formSquareFeet.Text),
+                        rent_per_sf = double.Parse(formRent.Text),
+                        annual_rent = annualRent,
+                        monthly_rent = annualRent / 12,
+                        lease_start = leaseStart,
+                        lease_end = leaseEnd,
+                        months_left = monthsLeft,
+                        tenant_property_id = propertyId
+                    };
+                    property.available_space = availableSpace - unitSize;
+                    _tenantAccess.AddNewTenant(tenant, propertyId);
+                    context.SaveChanges();
+                    Close();
 
-                _tenantAccess.AddNewTenant(tenant, propertyId);
-                Close();
-
-                MessageBoxButton mbBtn = MessageBoxButton.OK;
-                string header = "Add Expense";
-                string message = $"Tenant: {tenant.tenant_name} has been added.";
-                MessageBoxImage icon = MessageBoxImage.Information;
-                MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
-                Clear();
+                    MessageBoxButton mbBtn = MessageBoxButton.OK;
+                    string header = "Add Expense";
+                    string message = $"Tenant: {tenant.tenant_name} has been added.";
+                    MessageBoxImage icon = MessageBoxImage.Information;
+                    MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
+                    Clear();
+                }
             }
         }
     }

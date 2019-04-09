@@ -75,7 +75,7 @@ namespace JenningsRE
         {
 
             formExpenseName.Text = expense.expense_name;
-            formExpenseCost.Text = expense.expense_cost.ToString();
+            formExpenseCost.Text = expense.expense_cost.ToString("F");
             formContractorName.Text = expense.contractor_name;
             formExpenseDescription.Text = expense.expense_desc;
 

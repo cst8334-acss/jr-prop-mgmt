@@ -71,10 +71,9 @@ namespace JenningsRE
             formTenantName.Text = tenant.tenant_name;
             formUnitNumber.Text = tenant.unit_number.ToString();
             formSquareFeet.Text = tenant.unit_size_sqft.ToString("F");
-            formRent.Text = tenant.rent_per_sf.ToString("C");
+            formRent.Text = tenant.rent_per_sf.ToString("F");
             formStart.Text = tenant.lease_start.ToString("d");
             formEnd.Text = tenant.lease_end.ToString("d");
-            formMonthsLeft.Text = tenant.months_left.ToString();
         }
 
         /// <summary>
@@ -97,30 +96,45 @@ namespace JenningsRE
             var validator = Validate();
             if (validator)
             {
-                tenant editTenant = (from t in context.tenants
-                    where t.tenant_id == tenant.tenant_id
-                    select t).Single();
+                property property = (from p in context.properties
+                                     where p.property_id == tenant.tenant_property_id
+                                     select p).FirstOrDefault();
 
-                editTenant.tenant_name = formTenantName.Text;
-                editTenant.unit_number = int.Parse(formUnitNumber.Text);
-                editTenant.unit_size_sqft = double.Parse(formSquareFeet.Text);
-                editTenant.rent_per_sf = double.Parse(formRent.Text);
-                editTenant.annual_rent = tenant.rent_per_sf;
-                editTenant.monthly_rent = tenant.annual_rent / 12;
-                editTenant.lease_start = DateTime.Parse(formStart.Text);
-                editTenant.lease_end = DateTime.Parse(formEnd.Text);
-                editTenant.months_left = int.Parse(formMonthsLeft.Text);
+                var annualRent = (double.Parse(formRent.Text)) * (double.Parse(formSquareFeet.Text));
 
-                context.SaveChanges();
+                var unitSize = int.Parse(formSquareFeet.Text);
+                var availableSpace = property.available_space;
+                var leaseStart = DateTime.Parse(formStart.Text);
+                var leaseEnd = DateTime.Parse(formEnd.Text);
+                var monthsLeft = (leaseEnd.Month + leaseEnd.Year * 12) - (leaseStart.Month + leaseStart.Year * 12);
 
-                MainWindow.TenantDataGrid.ItemsSource = context.tenants.ToList();
+                if (unitSize <= availableSpace)
+                {
+                    tenant editTenant = (from t in context.tenants
+                        where t.tenant_id == tenant.tenant_id
+                        select t).Single();
 
-                MessageBoxButton mbBtn = MessageBoxButton.OK;
-                string header = "Update Tenant";
-                string message = $"Tenant name:{editTenant.tenant_name} has been altered.";
-                MessageBoxImage icon = MessageBoxImage.Information;
-                MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
-                Close();
+                    editTenant.tenant_name = formTenantName.Text;
+                    editTenant.unit_number = int.Parse(formUnitNumber.Text);
+                    editTenant.unit_size_sqft = unitSize;
+                    editTenant.rent_per_sf = double.Parse(formRent.Text);
+                    editTenant.annual_rent = annualRent;
+                    editTenant.monthly_rent = tenant.annual_rent / 12;
+                    editTenant.lease_start = leaseStart;
+                    editTenant.lease_end = leaseEnd;
+                    editTenant.months_left = monthsLeft;
+                    property.available_space = availableSpace - unitSize;
+                    context.SaveChanges();
+
+                    MainWindow.TenantDataGrid.ItemsSource = context.tenants.ToList();
+
+                    MessageBoxButton mbBtn = MessageBoxButton.OK;
+                    string header = "Update Tenant";
+                    string message = $"Tenant name:{editTenant.tenant_name} has been altered.";
+                    MessageBoxImage icon = MessageBoxImage.Information;
+                    MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
+                    Close();
+                }
             }
         }
     }
