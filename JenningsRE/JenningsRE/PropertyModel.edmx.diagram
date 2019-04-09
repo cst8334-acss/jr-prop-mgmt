@@ -13,6 +13,7 @@
         <AssociationConnector Association="jenningsdbModel.fk_analysis_return" ManuallyRouted="false" />
         <AssociationConnector Association="jenningsdbModel.fk_property_expense" ManuallyRouted="false" />
         <AssociationConnector Association="jenningsdbModel.fk_tenant_property" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="jenningsdbModel.user" Width="1.5" PointX="0.75" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

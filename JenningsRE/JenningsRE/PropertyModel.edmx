@@ -10,6 +10,7 @@
             <PropertyRef Name="analysis_id" />
           </Key>
           <Property Name="analysis_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="land_acquisition_price" Type="double" />
           <Property Name="acquisition_leasing_fee" Type="double" />
           <Property Name="acquisition_leasing_percentage" Type="double" />
           <Property Name="syndication_fee" Type="double" />
@@ -27,11 +28,8 @@
           <Property Name="total_acquisition_cost" Type="double" />
           <Property Name="mortgage_ltv_cost" Type="double" />
           <Property Name="mortgage_ltv_percentage" Type="double" />
-          <Property Name="twenty_year_interest_rate" Type="double" />
-          <Property Name="twenty_year_interest_rate_percentage" Type="double" />
           <Property Name="twenty_five_year_interest_rate" Type="double" />
           <Property Name="twenty_five_year_interest_rate_percentage" Type="double" />
-          <Property Name="annual_debt_service_twenty_years" Type="double" />
           <Property Name="annual_debt_service_twenty_five_years" Type="double" />
         </EntityType>
         <EntityType Name="expense">
@@ -99,6 +97,16 @@
           <Property Name="cash_on_cash_share" Type="double" />
           <Property Name="total_return_share" Type="double" />
         </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="passwordHash" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="isAdmin" Type="bool" />
+          <Property Name="isEnabled" Type="bool" />
+        </EntityType>
         <Association Name="fk_analysis_return">
           <End Role="analysis" Type="Self.analysis" Multiplicity="1" />
           <End Role="twenty_five_year_return" Type="Self.twenty_five_year_return" Multiplicity="*" />
@@ -141,6 +149,7 @@
           <EntitySet Name="property" EntityType="Self.property" Schema="jenningsdb" store:Type="Tables" />
           <EntitySet Name="tenant" EntityType="Self.tenant" Schema="jenningsdb" store:Type="Tables" />
           <EntitySet Name="twenty_five_year_return" EntityType="Self.twenty_five_year_return" Schema="jenningsdb" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="jenningsdb" store:Type="Tables" />
           <AssociationSet Name="fk_analysis_return" Association="Self.fk_analysis_return">
             <End Role="analysis" EntitySet="analysis" />
             <End Role="twenty_five_year_return" EntitySet="twenty_five_year_return" />
@@ -180,13 +189,11 @@
           <Property Name="total_acquisition_cost" Type="Double" />
           <Property Name="mortgage_ltv_cost" Type="Double" />
           <Property Name="mortgage_ltv_percentage" Type="Double" />
-          <Property Name="twenty_year_interest_rate" Type="Double" />
-          <Property Name="twenty_year_interest_rate_percentage" Type="Double" />
           <Property Name="twenty_five_year_interest_rate" Type="Double" />
           <Property Name="twenty_five_year_interest_rate_percentage" Type="Double" />
-          <Property Name="annual_debt_service_twenty_years" Type="Double" />
           <Property Name="annual_debt_service_twenty_five_years" Type="Double" />
           <NavigationProperty Name="twenty_five_year_return" Relationship="Self.fk_analysis_return" FromRole="analysis" ToRole="twenty_five_year_return" />
+          <Property Name="land_acquisition_price" Type="Double" />
         </EntityType>
         <EntityType Name="expense">
           <Key>
@@ -312,7 +319,18 @@
             <End Role="property" EntitySet="properties" />
             <End Role="tenant" EntitySet="tenants" />
           </AssociationSet>
+          <EntitySet Name="users" EntityType="jenningsdbModel.user" />
         </EntityContainer>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="passwordHash" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="isAdmin" Type="Boolean" />
+          <Property Name="isEnabled" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -322,6 +340,7 @@
           <EntitySetMapping Name="analyses">
             <EntityTypeMapping TypeName="jenningsdbModel.analysis">
               <MappingFragment StoreEntitySet="analysis">
+                <ScalarProperty Name="land_acquisition_price" ColumnName="land_acquisition_price" />
                 <ScalarProperty Name="analysis_id" ColumnName="analysis_id" />
                 <ScalarProperty Name="acquisition_leasing_fee" ColumnName="acquisition_leasing_fee" />
                 <ScalarProperty Name="acquisition_leasing_percentage" ColumnName="acquisition_leasing_percentage" />
@@ -340,11 +359,8 @@
                 <ScalarProperty Name="total_acquisition_cost" ColumnName="total_acquisition_cost" />
                 <ScalarProperty Name="mortgage_ltv_cost" ColumnName="mortgage_ltv_cost" />
                 <ScalarProperty Name="mortgage_ltv_percentage" ColumnName="mortgage_ltv_percentage" />
-                <ScalarProperty Name="twenty_year_interest_rate" ColumnName="twenty_year_interest_rate" />
-                <ScalarProperty Name="twenty_year_interest_rate_percentage" ColumnName="twenty_year_interest_rate_percentage" />
                 <ScalarProperty Name="twenty_five_year_interest_rate" ColumnName="twenty_five_year_interest_rate" />
                 <ScalarProperty Name="twenty_five_year_interest_rate_percentage" ColumnName="twenty_five_year_interest_rate_percentage" />
-                <ScalarProperty Name="annual_debt_service_twenty_years" ColumnName="annual_debt_service_twenty_years" />
                 <ScalarProperty Name="annual_debt_service_twenty_five_years" ColumnName="annual_debt_service_twenty_five_years" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -415,6 +431,17 @@
                 <ScalarProperty Name="internal_rate_of_return_percentage" ColumnName="internal_rate_of_return_percentage" />
                 <ScalarProperty Name="cash_on_cash_share" ColumnName="cash_on_cash_share" />
                 <ScalarProperty Name="total_return_share" ColumnName="total_return_share" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="jenningsdbModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="passwordHash" ColumnName="passwordHash" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -30,5 +30,6 @@ namespace JenningsRE
         public virtual DbSet<property> properties { get; set; }
         public virtual DbSet<tenant> tenants { get; set; }
         public virtual DbSet<twenty_five_year_return> twenty_five_year_return { get; set; }
+        public virtual DbSet<user> users { get; set; }
     }
 }
