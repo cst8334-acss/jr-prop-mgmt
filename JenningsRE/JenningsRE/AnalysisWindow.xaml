@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JenningsRE"
         mc:Ignorable="d"
-        Title="AnalysisWindow" Height="550" Width="850">
+        Title="AnalysisWindow" Height="550" Width="850" Icon="Resource/ACS.png">
     <Grid>
         <ListView HorizontalAlignment="Left" Height="474" VerticalAlignment="Top" Width="140" Background="#FF817878" RenderTransformOrigin="0.5,0.5" Margin="0,43,0,0">
             <ListView.RenderTransform>

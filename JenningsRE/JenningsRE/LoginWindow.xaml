@@ -5,16 +5,17 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:local="clr-namespace:JenningsRE"
        mc:Ignorable="d"
-       Title="LoginWindow" Height="450" Width="800">
+       Title="ACS Solutions" Height="450" Width="800" Icon="Resource/ACS.png">
     <Grid>
         <TextBox Margin="322,178,322,213" TextWrapping="Wrap" FontSize="15" Name="logUser"/>
         <PasswordBox Margin="322,237,322,154" FontSize="15" Name="logPass"/>
         <Label Content="Username" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="322,152,0,0"/>
         <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="322,212,0,0"/>
-        <Label Content="Jennings Real Estate" Margin="295,69,295,0" VerticalAlignment="Top" Height="42" FontSize="20"/>
         <Button Content="Login" Name="btLogin"  VerticalAlignment="Top" Margin="311,315,407,0" Click="Login_Click" IsDefault="true"/>
         <Label Name="lblValidation" Foreground="Red" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,270,0,0" VerticalAlignment="Top" Height="30" Width="250"/>
         <Button Content="Register" x:Name="btRegister"  VerticalAlignment="Top" Margin="390,315,328,0" Click="BtRegister_Click" IsDefault="true"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="199,47,0,0" VerticalAlignment="Top" Width="394" Source="Resource/JenningsRealEstate_Logo_Horizontal_4Cblack.png"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="69,270,0,0" VerticalAlignment="Top" Width="100" Source="Resource/ACS.png"/>
 
     </Grid>
 </Window>

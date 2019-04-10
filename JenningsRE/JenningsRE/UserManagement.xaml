@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="UserManagement" Height="387" Width="549"
         ResizeMode="CanMinimize"
-        Closed="Window_Closed">
+        Closed="Window_Closed"
+        Icon="Resource/ACS.png">
     <Grid Margin="0,0,2,0">
         <DataGrid x:Name="dgUsers" IsReadOnly="true" SelectedCellsChanged="DgUsers_SelectedCellsChanged"  SelectionMode="Single" AutoGenerateColumns="False" HorizontalAlignment="Center" Height="215" Margin="0,20,0,0" VerticalAlignment="Top" Width="377">
             <DataGrid.Columns>

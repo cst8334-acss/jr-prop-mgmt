@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JenningsRE"
         mc:Ignorable="d"
-        Title="ACS Property Manager" Height="450" Width="800">
+        Title="ACS Property Manager" Height="450" Width="800" Icon="Resource/ACS.png">
     <Window.Resources>
         <CollectionViewSource x:Key="expenseViewSource" d:DesignSource="{d:DesignInstance {x:Type local:expense}, CreateList=True}"/>
         <Style TargetType="ListViewItem">
@@ -95,6 +95,7 @@
                     </ComboBox>
                     <Button Content="Filter" Click="FilterTenantBtn_Click" Grid.Column="2" HorizontalAlignment="Left" Margin="152,30,0,0" VerticalAlignment="Top" Width="75"/>
                     <Button Content="Clear" Click="ClearTenantFilterBtn_Click" Grid.Column="2" HorizontalAlignment="Left" Margin="232,30,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Label Content="Tenant Filter" HorizontalAlignment="Left" Margin="26,4,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="89"/>
 
                 </Grid>
             </TabItem>

@@ -319,6 +319,8 @@
       <DependentUpon>PropertyModel.edmx</DependentUpon>
       <LastGenOutput>PropertyModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resource\ACS.png" />
+    <Resource Include="Resource\JenningsRealEstate_Logo_Horizontal_4Cblack.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JenningsRE"
         mc:Ignorable="d"
-        Title="UpdateTenant" Height="450" Width="388">
+        Title="UpdateTenant" Height="450" Width="388" Icon="Resource/ACS.png">
     <Grid Name="UpdateExpenseGrid" Background="#FFE5E5E5" Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>

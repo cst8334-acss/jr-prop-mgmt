@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JenningsRE"
         mc:Ignorable="d"
-        Title="OpenWindow" Height="450" Width="800">
+        Title="OpenWindow" Height="450" Width="800" Icon="Resource/ACS.png">
     <Grid>
         <Button Content="Property Management" Margin="70,75,0,75" HorizontalAlignment="Left" Width="269" Click="OpenMain_Click"/>
         <Button Content="Property Analysis" Margin="0,75,70,75" HorizontalAlignment="Right" Width="269" Click="OpenAnalysis_Click"/>

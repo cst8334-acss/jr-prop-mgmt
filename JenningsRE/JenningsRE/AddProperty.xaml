@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JenningsRE"
         mc:Ignorable="d"
-        Title="Add Property" Height="450" Width="800">
+        Title="Add Property" Height="450" Width="800" Icon="Resource/ACS.png">
     <Grid Name="AddPropertyGrid">
         <Button Content="Apply" Click="ApplyBtn_Click" HorizontalAlignment="Left" Margin="445,216,0,0" VerticalAlignment="Top" Width="75" Name="applyBtn" />
         <Button Content="Cancel" Click="CancelBtn_Click" HorizontalAlignment="Left" Margin="445,255,0,0" VerticalAlignment="Top" Width="75" Name="cancelBtn" />

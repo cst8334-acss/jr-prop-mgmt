@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:JenningsRE"
         mc:Ignorable="d"
         Title="RegisterWindow" Height="350" Width="444"
-        ResizeMode="CanMinimize">
+        ResizeMode="CanMinimize"
+        Icon="Resource/ACS.png">
     <Grid>
 
         <TextBox x:Name="tbUsername" HorizontalAlignment="Left" Height="23" Margin="195,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>

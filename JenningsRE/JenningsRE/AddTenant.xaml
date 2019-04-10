@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JenningsRE"
         mc:Ignorable="d"
-        Title="New Tenant" Height="400" Width="400">
+        Title="New Tenant" Height="400" Width="400" Icon="Resource/ACS.png">
     <Grid Name="TenantGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="57*"/>
