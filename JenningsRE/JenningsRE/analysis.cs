@@ -38,12 +38,10 @@ namespace JenningsRE
         public Nullable<double> total_acquisition_cost { get; set; }
         public Nullable<double> mortgage_ltv_cost { get; set; }
         public Nullable<double> mortgage_ltv_percentage { get; set; }
-        public Nullable<double> twenty_year_interest_rate { get; set; }
-        public Nullable<double> twenty_year_interest_rate_percentage { get; set; }
         public Nullable<double> twenty_five_year_interest_rate { get; set; }
         public Nullable<double> twenty_five_year_interest_rate_percentage { get; set; }
-        public Nullable<double> annual_debt_service_twenty_years { get; set; }
         public Nullable<double> annual_debt_service_twenty_five_years { get; set; }
+        public Nullable<double> land_acquisition_price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<twenty_five_year_return> twenty_five_year_return { get; set; }

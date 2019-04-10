@@ -10,6 +10,7 @@
             <PropertyRef Name="analysis_id" />
           </Key>
           <Property Name="analysis_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="land_acquisition_price" Type="double" />
           <Property Name="acquisition_leasing_fee" Type="double" />
           <Property Name="acquisition_leasing_percentage" Type="double" />
           <Property Name="syndication_fee" Type="double" />
@@ -27,11 +28,8 @@
           <Property Name="total_acquisition_cost" Type="double" />
           <Property Name="mortgage_ltv_cost" Type="double" />
           <Property Name="mortgage_ltv_percentage" Type="double" />
-          <Property Name="twenty_year_interest_rate" Type="double" />
-          <Property Name="twenty_year_interest_rate_percentage" Type="double" />
           <Property Name="twenty_five_year_interest_rate" Type="double" />
           <Property Name="twenty_five_year_interest_rate_percentage" Type="double" />
-          <Property Name="annual_debt_service_twenty_years" Type="double" />
           <Property Name="annual_debt_service_twenty_five_years" Type="double" />
         </EntityType>
         <EntityType Name="expense">
@@ -40,7 +38,7 @@
           </Key>
           <Property Name="expense_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="expense_name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="expense_desc" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="expense_desc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="expense_type" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="expense_cost" Type="double" Nullable="false" />
           <Property Name="contractor_name" Type="varchar" MaxLength="20" Nullable="false" />
@@ -180,13 +178,11 @@
           <Property Name="total_acquisition_cost" Type="Double" />
           <Property Name="mortgage_ltv_cost" Type="Double" />
           <Property Name="mortgage_ltv_percentage" Type="Double" />
-          <Property Name="twenty_year_interest_rate" Type="Double" />
-          <Property Name="twenty_year_interest_rate_percentage" Type="Double" />
           <Property Name="twenty_five_year_interest_rate" Type="Double" />
           <Property Name="twenty_five_year_interest_rate_percentage" Type="Double" />
-          <Property Name="annual_debt_service_twenty_years" Type="Double" />
           <Property Name="annual_debt_service_twenty_five_years" Type="Double" />
           <NavigationProperty Name="twenty_five_year_return" Relationship="Self.fk_analysis_return" FromRole="analysis" ToRole="twenty_five_year_return" />
+          <Property Name="land_acquisition_price" Type="Double" />
         </EntityType>
         <EntityType Name="expense">
           <Key>
@@ -322,6 +318,7 @@
           <EntitySetMapping Name="analyses">
             <EntityTypeMapping TypeName="jenningsdbModel.analysis">
               <MappingFragment StoreEntitySet="analysis">
+                <ScalarProperty Name="land_acquisition_price" ColumnName="land_acquisition_price" />
                 <ScalarProperty Name="analysis_id" ColumnName="analysis_id" />
                 <ScalarProperty Name="acquisition_leasing_fee" ColumnName="acquisition_leasing_fee" />
                 <ScalarProperty Name="acquisition_leasing_percentage" ColumnName="acquisition_leasing_percentage" />
@@ -340,11 +337,8 @@
                 <ScalarProperty Name="total_acquisition_cost" ColumnName="total_acquisition_cost" />
                 <ScalarProperty Name="mortgage_ltv_cost" ColumnName="mortgage_ltv_cost" />
                 <ScalarProperty Name="mortgage_ltv_percentage" ColumnName="mortgage_ltv_percentage" />
-                <ScalarProperty Name="twenty_year_interest_rate" ColumnName="twenty_year_interest_rate" />
-                <ScalarProperty Name="twenty_year_interest_rate_percentage" ColumnName="twenty_year_interest_rate_percentage" />
                 <ScalarProperty Name="twenty_five_year_interest_rate" ColumnName="twenty_five_year_interest_rate" />
                 <ScalarProperty Name="twenty_five_year_interest_rate_percentage" ColumnName="twenty_five_year_interest_rate_percentage" />
-                <ScalarProperty Name="annual_debt_service_twenty_years" ColumnName="annual_debt_service_twenty_years" />
                 <ScalarProperty Name="annual_debt_service_twenty_five_years" ColumnName="annual_debt_service_twenty_five_years" />
               </MappingFragment>
             </EntityTypeMapping>
