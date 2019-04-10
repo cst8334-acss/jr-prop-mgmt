@@ -10,6 +10,7 @@
             <PropertyRef Name="analysis_id" />
           </Key>
           <Property Name="analysis_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="analysis_name" Type="varchar" MaxLength="30" />
           <Property Name="land_acquisition_price" Type="double" />
           <Property Name="acquisition_leasing_fee" Type="double" />
           <Property Name="acquisition_leasing_percentage" Type="double" />
@@ -183,6 +184,7 @@
           <Property Name="annual_debt_service_twenty_five_years" Type="Double" />
           <NavigationProperty Name="twenty_five_year_return" Relationship="Self.fk_analysis_return" FromRole="analysis" ToRole="twenty_five_year_return" />
           <Property Name="land_acquisition_price" Type="Double" />
+          <Property Name="analysis_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="expense">
           <Key>
@@ -318,6 +320,7 @@
           <EntitySetMapping Name="analyses">
             <EntityTypeMapping TypeName="jenningsdbModel.analysis">
               <MappingFragment StoreEntitySet="analysis">
+                <ScalarProperty Name="analysis_name" ColumnName="analysis_name" />
                 <ScalarProperty Name="land_acquisition_price" ColumnName="land_acquisition_price" />
                 <ScalarProperty Name="analysis_id" ColumnName="analysis_id" />
                 <ScalarProperty Name="acquisition_leasing_fee" ColumnName="acquisition_leasing_fee" />

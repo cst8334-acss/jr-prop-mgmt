@@ -1,0 +1,15 @@
+﻿<Window x:Class="JenningsRE.AddAnalysis"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JenningsRE"
+        mc:Ignorable="d"
+        Title="AddAnalysis" Height="200" Width="300">
+    <Grid x:Name="AddAnalysisGrid">
+        <Label Content="Name" HorizontalAlignment="Left" Margin="25,30,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="125,30,0,0" TextWrapping="Wrap" Text="{Binding propertyName}" VerticalAlignment="Top" Width="120" x:Name="formName" Grid.Column="2"/>
+        <Button Content="Apply" Click="ApplyBtn_Click" HorizontalAlignment="Left" Margin="50,100,0,0" VerticalAlignment="Top" Width="75" Name="applyBtn" />
+        <Button Content="Cancel" Click="CancelBtn_Click" HorizontalAlignment="Left" Margin="150,100,0,0" VerticalAlignment="Top" Width="75" Name="cancelBtn" />
+    </Grid>
+</Window>

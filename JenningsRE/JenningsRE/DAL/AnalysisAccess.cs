@@ -9,20 +9,18 @@ namespace JenningsRE.DAL
 public class AnalysisAccess
     {
         jenningsdbEntitiesConnection context;
+        AnalysisWindow _aw;
 
-        public AnalysisAccess(jenningsdbEntitiesConnection context)
+        public AnalysisAccess(jenningsdbEntitiesConnection context, AnalysisWindow analysisWindow)
         {
             this.context = context;
+            _aw = analysisWindow;
         }
 
         /// <summary>
-        /// Add New Expense to the Database
+        /// Add New Analysis to the Database
         /// </summary>
-        /// <param name="ana_name"></param>
-        /// <param name="ana_cost"></param>
-        /// <param name="ana_desc"></param>
-        /// <param name="contractor_name"></param>
-        /// <param name="ana_type"></param>
+        /// <param name="ana"></param>
         public void AddAnalysis(analysis ana)
         {
             //TODO SET PROPERTY_EXPENSE_ID HERE - LE
@@ -30,35 +28,35 @@ public class AnalysisAccess
             context.analyses.Add(ana);
             context.SaveChanges();
 
+            _aw.LoadPropertyList();
             //MainWindow.analysisDataGrid.ItemsSource = context.analysis.ToList();
 
         }
 
         /// <summary>
-        /// Gets a List of expenses related to the supplied property id.
+        /// Gets a list of all analyses
         /// </summary>
-        /// <param name="property_id"></param>
-        /// <returns>List of type expense</returns>
-        public List<analysis> GetAnalysis(int analysis_id)
+        /// <param name="analysis_id"></param>
+        /// <returns>List of type analysis</returns>
+        public List<analysis> GetAnalysis()
         {
-            var propAnalysis = from e in context.analyses select e;
-
-            return propAnalysis.ToList();
+            return context.analyses.ToList();
         }
 
         /// <summary>
         /// Deletes the passed Expense object from DataGrid and DB
         /// </summary>
         /// <param name="exp"></param>
-        public void RemoveAnalysis(analysis ana)
+        public void RemoveAnalysis(int id)
         {
             var delAna = (from an in context.analyses
-                          where an.analysis_id == ana.analysis_id
+                          where an.analysis_id == id
                           select an).Single();
 
             context.analyses.Remove(delAna);
             context.SaveChanges();
 
+            _aw.LoadPropertyList();
             // MainWindow.analysisDataGrid.ItemsSource = context.analysis.ToList();
         }
 
