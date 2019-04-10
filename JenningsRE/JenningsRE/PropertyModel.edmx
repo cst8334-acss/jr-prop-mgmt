@@ -38,7 +38,7 @@
           </Key>
           <Property Name="expense_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="expense_name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="expense_desc" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="expense_desc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="expense_type" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="expense_cost" Type="double" Nullable="false" />
           <Property Name="contractor_name" Type="varchar" MaxLength="20" Nullable="false" />

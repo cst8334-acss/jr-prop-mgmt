@@ -43,6 +43,28 @@ namespace JenningsRE
             cancelBtn.Click += CancelBtn_Click;
         }
 
+        /// <summary>
+        /// Validating inputs
+        /// </summary>
+        /// <returns></returns>
+        private Boolean Validate()
+        {
+            foreach (Control control in AddPropertyGrid.Children)
+            {
+                string controlType = control.GetType().ToString();
+                if (controlType == "System.Windows.Controls.TextBox")
+                {
+                    TextBox txtBox = (TextBox)control;
+                    if (string.IsNullOrEmpty(txtBox.Text))
+                    {
+                        MessageBox.Show(txtBox.Name + " Can not be empty");
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -50,30 +72,33 @@ namespace JenningsRE
 
         private void ApplyBtn_Click(object sender, RoutedEventArgs e)
         {
-            property property = new property
+            var validator = Validate();
+            if (validator)
             {
-                property_name = formName.Text,
-                address = formAddress.Text,
-                city = formCity.Text,
-                province = formProvince.Text,
-                country = formCountry.Text,
-                postal_code = formPostal.Text,
-                number_of_units = int.Parse(formNumberOfUnits.Text),
-                available_space = int.Parse(formAvailableSpace.Text),
-                rentable_area = int.Parse(formRentableArea.Text),
-                parking_spots = formParkingSpots.Text
-            };
+                property property = new property
+                {
+                    property_name = formName.Text,
+                    address = formAddress.Text,
+                    city = formCity.Text,
+                    province = formProvince.Text,
+                    country = formCountry.Text,
+                    postal_code = formPostal.Text,
+                    number_of_units = int.Parse(formNumberOfUnits.Text),
+                    available_space = int.Parse(formAvailableSpace.Text),
+                    rentable_area = int.Parse(formRentableArea.Text),
+                    parking_spots = formParkingSpots.Text
+                };
 
-            _propertyAccess.AddProperty(property);
+                _propertyAccess.AddProperty(property);
 
-            Close();
+                Close();
 
-            MessageBoxButton mbBtn = MessageBoxButton.OK;
-            string header = "Add Property";
-            string message = $"Property: {property.property_name} has been created.";
-            MessageBoxImage icon = MessageBoxImage.Information;
-            MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
-
+                MessageBoxButton mbBtn = MessageBoxButton.OK;
+                string header = "Add Property";
+                string message = $"Property: {property.property_name} has been created.";
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
+            }
         }
     }
 }
