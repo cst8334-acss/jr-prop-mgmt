@@ -23,14 +23,16 @@ namespace JenningsRE
         #region Members
         jenningsdbEntitiesConnection context;
         ExpenseAccess _expenseAccess;
+        int propertyId;
         #endregion
 
-        public AddExpense(jenningsdbEntitiesConnection context, ExpenseAccess expenseAccess)
+        public AddExpense(jenningsdbEntitiesConnection context, ExpenseAccess expenseAccess, int propertyId)
         {
 
             InitializeComponent();
             this.context = context;
             _expenseAccess = expenseAccess;
+            this.propertyId = propertyId;
 
 
             //Add Expense Button
@@ -50,6 +52,28 @@ namespace JenningsRE
         }
 
         /// <summary>
+        /// Validating inputs
+        /// </summary>
+        /// <returns></returns>
+        private Boolean Validate()
+        {
+            foreach (Control control in AddExpensesGrid.Children)
+            {
+                string controlType = control.GetType().ToString();
+                if (controlType == "System.Windows.Controls.TextBox")
+                {
+                    TextBox txtBox = (TextBox)control;
+                    if (string.IsNullOrEmpty(txtBox.Text))
+                    {
+                        MessageBox.Show(txtBox.Name + " Can not be empty");
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
         /// Closes the window, disregards changes.
         /// </summary>
         /// <param name="sender"></param>
@@ -59,6 +83,7 @@ namespace JenningsRE
             Close();
         }
 
+
         /// <summary>
         /// Creates expense based on provided fields.
         /// </summary>
@@ -66,27 +91,32 @@ namespace JenningsRE
         /// <param name="e"></param>
         private void ApplyBtn_Click(object sender, RoutedEventArgs e)
         {
-
-            //Map Textbox fields to new expense object
-            expense expense = new expense
+            var validator = Validate();
+            if (validator)
             {
-                expense_name = formExpenseName.Text,
-                expense_cost = Double.Parse(formExpenseCost.Text),
-                expense_desc = formExpenseDescription.Text,
-                contractor_name = formContractorName.Text,
-                expense_type = expTypeOp.IsChecked == true ? expTypeOp.Content.ToString() : expTypeAdm.Content.ToString()
-            };
+                //Map Textbox fields to new expense object
+                expense expense = new expense
+                {
+                    expense_name = formExpenseName.Text,
+                    expense_cost = Double.Parse(formExpenseCost.Text),
+                    expense_desc = formExpenseDescription.Text,
+                    contractor_name = formContractorName.Text,
+                    expense_type = expTypeOp.IsChecked == true
+                        ? expTypeOp.Content.ToString()
+                        : expTypeAdm.Content.ToString()
+                };
 
-            //Add expense to DataGrid and DB
-            _expenseAccess.AddExpense(expense);
+                //Add expense to DataGrid and DB
+                _expenseAccess.AddExpense(expense, propertyId);
 
-            Close();
+                Close();
 
-            MessageBoxButton mbBtn = MessageBoxButton.OK;
-            string header = "Add Expense";
-            string message = $"Expense: {expense.expense_name} has been created.";
-            MessageBoxImage icon = MessageBoxImage.Information;
-            MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
+                MessageBoxButton mbBtn = MessageBoxButton.OK;
+                string header = "Add Expense";
+                string message = $"Expense: {expense.expense_name} has been created.";
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result = MessageBox.Show(message, header, mbBtn, icon);
+            }
         }
 
     }
