@@ -145,6 +145,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddAnalysis.xaml.cs">
+      <DependentUpon>AddAnalysis.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddExpense.xaml.cs">
       <DependentUpon>AddExpense.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,10 @@
     <Compile Include="UserManagement.xaml.cs">
       <DependentUpon>UserManagement.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddAnalysis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddExpense.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
